@@ -48,7 +48,7 @@ class MaestroController extends AppBaseController
 	 */
 	public function create()
 	{
-		return view('maestros.create');
+		return view('maestros.index');
 	}
 
 	/**
@@ -146,7 +146,7 @@ class MaestroController extends AppBaseController
 
 		if(empty($maestro))
 		{
-			Flash::error('Maestro not found');
+			Flash::error('Maestro no encontrado');
 			return redirect(route('maestros.index'));
 		}
 
