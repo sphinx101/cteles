@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: cteles
+        psr4_prefix: cteles
+        src_path: app
