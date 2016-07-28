@@ -47,7 +47,7 @@ class AlumnoController extends Controller{
 	 */
 	public function create()
 	{
-		dd('formulario para alta de alumno');
+		dd('formulario para pre-inscripcion de alumno');
 	}
 
 	/**

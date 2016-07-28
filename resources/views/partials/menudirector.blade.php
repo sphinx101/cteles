@@ -27,7 +27,7 @@
         <ul class="dropdown-menu">
 
 
-            <li><a href="{{route('escuela.alumnos.create')}}"><i class="material-icons">group_add</i><span>&nbsp;Registrar Datos Alumno</span></a></li>
+            <li><a href="{{route('escuela.alumnos.create')}}"><i class="material-icons">group_add</i><span>&nbsp;PreInscribir Alumno Primer Grado</span></a></li>
             <li><a href=""><i class="material-icons">school</i><span>&nbsp;Inscribir Alumno Ciclo Escolar</span></a></li>
 
 
