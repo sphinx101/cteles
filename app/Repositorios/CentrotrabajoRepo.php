@@ -4,6 +4,8 @@ namespace cteles\Repositorios;
 
 
 use cteles\Models\Centrotrabajo;
+use cteles\Models\Docente;
+use cteles\User;
 use Illuminate\Support\Facades\Schema;
 
 class CentrotrabajoRepo{
@@ -29,6 +31,12 @@ class CentrotrabajoRepo{
         return Centrotrabajo::find($id);
     }
 
+    public function findCentrotrabajoByUserId($user_id){
+        $user=User::find($user_id);
+        $docente=$user->docente;
+        $ct=Centrotrabajo::find($docente->centrotrabajo_id);
+        return $ct;
+    }
 
     public function search($input){
         $query = Centrotrabajo::query();

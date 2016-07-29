@@ -7,6 +7,7 @@ use cteles\Repositorios\AlumnoRepo;
 use cteles\Repositorios\CentrotrabajoRepo;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Mitul\Generator\Utils\ResponseManager;
 use Response;
 
@@ -45,9 +46,13 @@ class AlumnoController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		dd('formulario para pre-inscripcion de alumno');
+	public function create(){
+
+		//dd('formulario para pre-inscripcion de alumno');
+		$titulo='Nuevo/PreInscripcion Alumno';
+		$ccts=$this->centrotrabajoRepo->findCentrotrabajoByUserId(Auth::user()->id)->cct;
+		$etiquetaBoton='Aceptar';
+		return view('alumnos.create')->with('titulo',$titulo)->with('ccts',$ccts)->with('etiquetaBoton',$etiquetaBoton);
 	}
 
 	/**

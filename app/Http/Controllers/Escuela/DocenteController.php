@@ -81,7 +81,7 @@ class DocenteController extends Controller {
 	 * @return Response
 	 */
 	public function show($id){
-        dd('muestra un docente en particular');
+        dd('muestra la informacion de un docente en particular');
 	}
 
 	/**
