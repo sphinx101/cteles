@@ -6,7 +6,7 @@
         {!! Form::open(['role'=>'form','route'=>'escuela.alumnos.store']) !!}
         <div class="form-group">
             <input type="hidden" name="centrotrabajo_id" value="{!! $ccts !!}}">
-
+            @include('alumnos.segmentos.campos')
         </div>
     </div>
     @include('docentes.segmentos.closeTagsForm')
