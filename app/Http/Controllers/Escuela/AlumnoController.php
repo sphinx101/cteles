@@ -40,7 +40,7 @@ class AlumnoController extends Controller{
 	 * @return Response
 	 */
 	public function index(Request $request){
-		dd('listado alumnos');
+		dd('listado alumnos registrados');
 	}
 
 	/**
@@ -60,7 +60,7 @@ class AlumnoController extends Controller{
 	/**
 	 * Store a newly created Alumno in storage.
 	 *
-	 * @param Request $request
+	 * @param CreateAlumnoRequest $request
 	 *
 	 * @return Response
 	 */
