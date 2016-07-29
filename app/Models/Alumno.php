@@ -24,7 +24,7 @@ class Alumno extends Model{
 
 	public static $rules = [
 	    'centrotrabajo_id' => 'required',
-		'curp' => 'unique:alumnos',
+		'curp' => 'required|unique:alumnos|min:18|max:18',
 		'nombre' => 'required',
 		'appaterno' => 'required',
 		'apmaterno' => 'required',

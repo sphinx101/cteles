@@ -79,7 +79,7 @@ class DocenteRepo{
 
     public function store($data){
 
-
+      //dd($data->all());
       return Docente::create($data->all());
     }
 

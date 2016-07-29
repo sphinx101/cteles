@@ -2,12 +2,14 @@
 
 use cteles\Http\Controllers\Controller;
 use cteles\Http\Requests;
+use cteles\Http\Requests\CreateAlumnoRequest;
 use cteles\Models\Alumno;
 use cteles\Repositorios\AlumnoRepo;
 use cteles\Repositorios\CentrotrabajoRepo;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Laracasts\Flash\Flash;
 use Mitul\Generator\Utils\ResponseManager;
 use Response;
 
@@ -48,10 +50,10 @@ class AlumnoController extends Controller{
 	 */
 	public function create(){
 
-		//dd('formulario para pre-inscripcion de alumno');
-		$titulo='Nuevo/PreInscripcion Alumno';
-		$ccts=$this->centrotrabajoRepo->findCentrotrabajoByUserId(Auth::user()->id)->cct;
-		$etiquetaBoton='Aceptar';
+		//dd('formulario registro de alumno');
+		$titulo='Nuevo/PreInscripcion Alumno    TODOS LOS CAMPOS SON OBLIGATORIOS';
+		$ccts=$this->centrotrabajoRepo->findCentrotrabajoByUserId(Auth::user()->id)->id;
+		$etiquetaBoton='Guardar';
 		return view('alumnos.create')->with('titulo',$titulo)->with('ccts',$ccts)->with('etiquetaBoton',$etiquetaBoton);
 	}
 
@@ -62,9 +64,11 @@ class AlumnoController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
-	{
+	public function store(CreateAlumnoRequest $input){
 
+		$this->alumnoRepo->store($input);
+		Flash::info('Alumno Registrado con Exito');
+		return redirect(url('/home'));
 	}
 
 	/**

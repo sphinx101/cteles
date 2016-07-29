@@ -3,6 +3,8 @@
 namespace cteles\Repositorios;
 
 
+use cteles\Models\Alumno;
+
 class AlumnoRepo{
 
 
@@ -11,7 +13,10 @@ class AlumnoRepo{
     public function retrieveAlumnoCT($centrotrabajo_id){}
 
 
-    public function store($data){}
+    public function store($data){
+
+        return Alumno::create($data->all());
+    }
 
     public function update($alumno_id){}
 
