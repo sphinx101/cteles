@@ -10,18 +10,14 @@ class Inscripcion extends Model {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $fillable=['alumno_id','aula_id','cicloescolar_id','turno_id','grupo_id','grado_id'];
+    protected $fillable=['alumno_id','aula_id'];
     protected $guarded=['id'];
 
     protected $hidden=['created_at','updated_at'];
 
     public static $rules=[
         'alumno_id'=>'required',
-        'aula_id' => 'required',
-        'cicloescolar_id'=>'required',
-        'turno_id'=> 'required',
-        'grupo_id' => 'required',
-        'grado_id' => 'required'
+        'aula_id' => 'required'
     ];
 
     //************************ Relaciones **************************
@@ -31,7 +27,7 @@ class Inscripcion extends Model {
     public function aula(){
         return $this->belongsTo('cteles\Models\Aula');
     }
-    public function cicloescolar(){
+   /* public function cicloescolar(){
         return $this->belongsTo('cteles\Models\Cicloescolar');
     }
     public function turno(){
@@ -42,7 +38,7 @@ class Inscripcion extends Model {
     }
     public function grado(){
         return $this->belongsTo('cteles\Models\Grado');
-    }
+    }*/
 
 
 }

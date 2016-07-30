@@ -109,14 +109,14 @@ class CreateDbCteles extends Migration {
 			// $table->foreign('alumno_id')->references('id')->on('alumnos')->onUpdate('cascade');  // relacion alumno-aula
 			$table->integer('docente_id')->unsigned();
 			$table->foreign('docente_id')->references('id')->on('docentes')->onUpdate('cascade'); //relacion docente-aula
-			/* $table->integer('turno_id')->unsigned();
-             $table->foreign('turno_id')->references('id')->on('turnos')->onUpdate('cascade'); //relacion turno-aula
-             $table->integer('grupo_id')->unsigned();
-             $table->foreign('grupo_id')->references('id')->on('grupos')->onUpdate('cascade'); //relacion grupo-aula
-             $table->integer('grado_id')->unsigned();
-             $table->foreign('grado_id')->references('id')->on('grados')->onUpdate('cascade'); // relacion grado-aula*/
-			// $table->integer('cicloescolar_id')->unsigned();
-			// $table->foreign('cicloescolar_id')->references('id')->on('cicloescolares')->onUpdate('cascade'); // relacion ciclo-aula
+			$table->integer('turno_id')->unsigned();
+            $table->foreign('turno_id')->references('id')->on('turnos')->onUpdate('cascade'); //relacion turno-aula
+            $table->integer('grupo_id')->unsigned();
+            $table->foreign('grupo_id')->references('id')->on('grupos')->onUpdate('cascade'); //relacion grupo-aula
+            $table->integer('grado_id')->unsigned();
+            $table->foreign('grado_id')->references('id')->on('grados')->onUpdate('cascade'); // relacion grado-aula
+			$table->integer('cicloescolar_id')->unsigned();
+			$table->foreign('cicloescolar_id')->references('id')->on('cicloescolares')->onUpdate('cascade'); // relacion ciclo-aula
 			//$table->integer('inscripcion_id')->unsigned();
 			//$table->foreign('inscripcion_id')->references('id')->on('inscripciones')->onUpdate('cascade');  // relacion inscripcion-aula
 
@@ -132,14 +132,14 @@ class CreateDbCteles extends Migration {
 			$table->foreign('alumno_id')->references('id')->on('alumnos')->onUpdate('cascade')->onDelete('cascade'); // relacion alumno-inscripcion
 			$table->integer('aula_id')->unsigned();
 			$table->foreign('aula_id')->references('id')->on('aulas')->onUpdate('cascade');  // relacion aula-inscripcion
-			$table->integer('cicloescolar_id')->unsigned();
-			$table->foreign('cicloescolar_id')->references('id')->on('cicloescolares')->onUpdate('cascade');  // relacion ciclo-inscripcion
-			$table->integer('turno_id')->unsigned();
-			$table->foreign('turno_id')->references('id')->on('turnos')->onUpdate('cascade'); //relacion turno-inscripcion
-			$table->integer('grupo_id')->unsigned();
-			$table->foreign('grupo_id')->references('id')->on('grupos')->onUpdate('cascade'); //relacion grupo-inscripcion
-			$table->integer('grado_id')->unsigned();
-			$table->foreign('grado_id')->references('id')->on('grados')->onUpdate('cascade'); // relacion grado-inscripcion
+			//$table->integer('cicloescolar_id')->unsigned();
+			//$table->foreign('cicloescolar_id')->references('id')->on('cicloescolares')->onUpdate('cascade');  // relacion ciclo-inscripcion
+			//$table->integer('turno_id')->unsigned();
+			//$table->foreign('turno_id')->references('id')->on('turnos')->onUpdate('cascade'); //relacion turno-inscripcion
+			//$table->integer('grupo_id')->unsigned();
+			//$table->foreign('grupo_id')->references('id')->on('grupos')->onUpdate('cascade'); //relacion grupo-inscripcion
+			//$table->integer('grado_id')->unsigned();
+			//$table->foreign('grado_id')->references('id')->on('grados')->onUpdate('cascade'); // relacion grado-inscripcion
 
 
 			$table->timestamps();

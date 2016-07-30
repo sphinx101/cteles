@@ -20,10 +20,10 @@ class Cicloescolar extends Model{
 	];
 
 	//******************* Relaciones ******************
-	public function inscripciones(){
-		return $this->hasMany('cteles\Models\Inscripcion');
-	}
-	//public function aulas(){
-	//	return $this->hasMany('cteles\Models\Aula');
+	//public function inscripciones(){
+	//	return $this->hasMany('cteles\Models\Inscripcion');
 	//}
+	public function aulas(){
+		return $this->hasMany('cteles\Models\Aula');
+	}
 }

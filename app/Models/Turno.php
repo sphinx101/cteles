@@ -19,10 +19,10 @@ class Turno extends Model {
         "nom_turno" => "required|unique:turnos"
     ];
     //******************* Relaciones ******************
-   // public function aulas(){
-   //     return $this->hasMany('cteles\Models\Aula');
-   // }
-    public function inscripciones(){
-        return $this->hasMany('cteles\Models\Inscripcion');
+    public function aulas(){
+       return $this->hasMany('cteles\Models\Aula');
     }
+    //public function inscripciones(){
+    //    return $this->hasMany('cteles\Models\Inscripcion');
+   // }
 }
