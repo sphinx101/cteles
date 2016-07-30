@@ -25,7 +25,8 @@ class DocenteRepo{
             /*TODO Verificar que existe el usuario autenticado en la tabla docentes*/
 
             $docente=$this->findDocenteByUserId(\Auth::user()->id);
-            $ct_id=Centrotrabajo::find($docente->first()->centrotrabajo_id)->id;
+           // dd($docente->centrotrabajo_id);
+            $ct_id=Centrotrabajo::find($docente->centrotrabajo_id)->id;
 
 
             $docentes=Docente::join('centrotrabajos as ct','ct.id','=','docentes.centrotrabajo_id')
