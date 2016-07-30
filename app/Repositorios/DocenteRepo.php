@@ -45,6 +45,10 @@ class DocenteRepo{
 
     }
 
+    public function show($docente_id){
+        dd('muestra la informacion de un docente en particular');
+    }
+
 
 
     /**
