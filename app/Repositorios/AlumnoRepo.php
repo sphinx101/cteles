@@ -8,7 +8,9 @@ use cteles\Models\Alumno;
 class AlumnoRepo{
 
 
-    public function all(){}
+    public function all(){
+        dd('lista todos los alumnos registrados');
+    }
 
     public function retrieveAlumnoCT($centrotrabajo_id){}
 

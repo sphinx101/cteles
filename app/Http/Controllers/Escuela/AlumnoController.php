@@ -39,8 +39,9 @@ class AlumnoController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function index(Request $request){
-		dd('listado alumnos registrados');
+	public function index(){
+		$alumnos=$this->alumnoRepo->all();
+
 	}
 
 	/**

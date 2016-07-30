@@ -10,7 +10,7 @@
 
         @if(Entrust::hasRole('director') || Entrust::hasRole('admin'))
             <li><a href="{{route('escuela.docentes.index')}}"><i class="material-icons">sort_by_alpha</i><span>&nbsp;Listar Docente Aula Asignada</span></a></li>
-            <li><a href="#"><i class="material-icons">local_library</i><span>&nbsp;Asignar Aula-Alumno</span></a></li>
+            <li><a href="#"><i class="material-icons">local_library</i><span>&nbsp;Asignar Aula a Docente</span></a></li>
 
         @endif
         @if(Entrust::hasRole('supervisor') || Entrust::hasRole('admin') )
@@ -28,7 +28,12 @@
 
 
             <li><a href="{{route('escuela.alumnos.create')}}"><i class="material-icons">group_add</i><span>&nbsp;Registrar/PreInscribir Nuevo Alumno</span></a></li>
+            <li><a href="{{route('escuela.alumnos.index')}}"><i class="material-icons">sort_by_alpha</i><span>&nbsp;Listar Alumnos Registrados</span> </a></li>
+            <li role="separator" class="divider"></li>
+
             <li><a href=""><i class="material-icons">school</i><span>&nbsp;Inscribir Alumno Ciclo Escolar</span></a></li>
+            <li><a href="{{route('escuela.alumnos.index')}}"><i class="material-icons">sort_by_alpha</i><span>&nbsp;Listar Alumnos Con Inscripcion</span> </a></li>
+            <li><a href="{{route('escuela.alumnos.index')}}"><i class="material-icons">sort_by_alpha</i><span>&nbsp;Listar Alumnos Sin Inscripcion</span> </a></li>
 
 
         </ul>
