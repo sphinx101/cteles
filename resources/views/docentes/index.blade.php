@@ -14,13 +14,13 @@
                             <table class="table table-hover">
                                 <thead>
 
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Rfc</th>
-                                <th>CURP</th>
-                                <th># Celular</th>
-                                <th># Tel. Part.</th>
-                                <th width="290px" text->Accion</th>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Rfc</th>
+                                    <th>CURP</th>
+                                    <th># Celular</th>
+                                    <th># Tel. Part.</th>
+                                    <th width="290px">Accion</th>
                                 </thead>
                                 <tbody>
 

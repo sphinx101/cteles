@@ -22,7 +22,9 @@ class DocenteRepo{
         $docentes=null;
         if(\Auth::user()->type=='director'){
 
-            /*TODO Verificar que existe el usuario autenticado en la tabla docentes*/
+            /*TODO Verificar que existe el usuario autenticado en la tabla docentes
+              TODO Agregar al listado el puesto del trabajador
+            */
 
             $docente=$this->findDocenteByUserId(\Auth::user()->id);
            // dd($docente->centrotrabajo_id);
