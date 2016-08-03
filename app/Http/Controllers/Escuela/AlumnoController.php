@@ -40,10 +40,11 @@ class AlumnoController extends Controller{
 	 * @return Response
 	 */
 	public function index(){
-		//$alumnos=$this->alumnoRepo->all();
-		$TituloTabla='EL PARACHO';
+		$alumnos=$this->alumnoRepo->all();
+		$TituloTabla=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
 
-		return view('alumnos.index',compact('TituloTabla'));
+
+		return view('alumnos.index',compact('TituloTabla','alumnos'));
 
 	}
 
