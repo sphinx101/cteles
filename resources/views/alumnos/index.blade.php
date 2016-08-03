@@ -8,7 +8,7 @@
                 <div class="panel-heading">
 
                         <h3>Alumnos Registrados  Centro de Trabajo {!! $TituloTabla !!}</h3>
-                        {!! Form::open(['route'=>['escuela.alumnos.index'],'method'=>'GET','role'=>'form','class'=>'form-inline text-right']) !!}
+                        {!! Form::model($curp_request,['route'=>['escuela.alumnos.index'],'method'=>'GET','role'=>'form','class'=>'form-inline text-right']) !!}
 
                         {!! Form::label('lblcurp','CURP',array('class'=>'sr-only')) !!}
                         {!! Form::text('curp',null,array('class'=>'form-control','id'=>'lblcurp','placeholder'=>'CURP Alumno')) !!}
@@ -59,7 +59,7 @@
                                  @endforeach
                                  </tbody>
                             </table>
-                            {!! $alumnos->appends(Request::all())->render()!!}
+                            {!! $alumnos->appends($curp_request)->render()!!}
                         @endif
                     </div>
                 </div>
