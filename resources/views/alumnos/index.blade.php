@@ -2,13 +2,25 @@
 @section ('content')
     <div class="container">
         @include('flash::message')
+
         <div class="row">
             <div class="panel panel-primary">
-                <div class="panel-heading">Alumnos Registrados para el Ciclo Escolar Actual del Centro de Trabajo {!! $TituloTabla !!}</div>
+                <div class="panel-heading">
+
+                        <h3>Alumnos Registrados  Centro de Trabajo {!! $TituloTabla !!}</h3>
+                        {!! Form::open(['route'=>['escuela.alumnos.index'],'method'=>'GET','role'=>'form','class'=>'form-inline text-right']) !!}
+
+                        {!! Form::label('lblcurp','CURP',array('class'=>'sr-only')) !!}
+                        {!! Form::text('curp',null,array('class'=>'form-control','id'=>'lblcurp','placeholder'=>'CURP Alumno')) !!}
+                        {!! Form::submit('Buscar', ['class' => 'btn btn-info']) !!}
+                         <a href="{{url('/escuela/alumnos')}}" class="btn btn-default" role="button">Mostrar Todos</a>
+                        {!! Form::close() !!}
+
+                </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         @if($alumnos->isEmpty())
-                            <div class="well text-center">No Existen Docentes Registrados</div>
+                            <div class="well text-center">No Existen Alumnos Registrados</div>
                         @else
                             <table class="table table-hover">
                                  <thead>
@@ -36,7 +48,7 @@
                                              @endif
 
                                              <td>
-                                                    {!! Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar']) !!}
+                                                    {!! Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}
                                                         <a href="{!! route('escuela.alumnos.show',[$alumno->id]) !!}" class="btn btn-success" role="button"><i class="material-icons">remove_red_eye</i> </a>
                                                         <a href="{!! route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info" role="button"><i class="material-icons">mode_edit</i></a>
                                                         <button class="btn btn-danger" type="submit"><i class="material-icons">delete_forever</i></button>
@@ -47,7 +59,7 @@
                                  @endforeach
                                  </tbody>
                             </table>
-                            {!! $alumnos->render()!!}
+                            {!! $alumnos->appends(Request::all())->render()!!}
                         @endif
                     </div>
                 </div>

@@ -38,6 +38,18 @@ class AlumnoRepo{
 
 
 
+    public function retrieveAlumnoByCurp($curp){
+        //dd($curp);
+        $ct=$this->findCentroTrabajoByUser(\Auth::user()->id);
+        $alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
+            ->leftjoin('padretutores as pt','pt.alumno_id','=','alumnos.id')
+            ->where('ct.id','=',$ct->id)
+            ->where('alumnos.curp','LIKE','%'.$curp.'%')
+            ->orderby('alumnos.id')
+            ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor');
+
+        return $alumnos->paginate(10);
+    }
 
     public function findCentroTrabajoByUser($user_id){
         $user=User::find($user_id);

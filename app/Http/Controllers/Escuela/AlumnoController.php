@@ -39,8 +39,17 @@ class AlumnoController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function index(){
-		$alumnos=$this->alumnoRepo->all();
+	public function index(Request $request){
+        $curp=$request->get('curp');
+		if(!isset($curp) && trim($curp)!='') {
+			dd($curp);
+			$alumnos = $this->alumnoRepo->all();
+		}
+		else{
+			$alumnos=$this->alumnoRepo->retrieveAlumnoByCurp($curp);
+
+		}
+
 		$TituloTabla=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
 
 
