@@ -1,5 +1,7 @@
 <?php namespace cteles\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 class WelcomeController extends Controller {
 
 	/*
