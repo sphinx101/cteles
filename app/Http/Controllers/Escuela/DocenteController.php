@@ -108,8 +108,8 @@ class DocenteController extends Controller {
 	 * @return Response
 	 */
 	public function update($id_docente,EditDocenteRequest $request)	{
-        $mensaje='';
-		$url='';
+        $mensaje=null;
+		$url=null;
 		//dd(\Auth::user()->id.'='.$id_docente);
 
         if($this->docenteRepo->update($id_docente,$request)){

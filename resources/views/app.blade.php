@@ -91,6 +91,7 @@
 			integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script src="{{asset('/js/material.min.js')}}"></script>
 	<script src="{{asset('/js/ripples.min.js')}}"></script>
+	<script src="{{asset('/js/opcionesMenu.js')}}"></script>
 	@yield('script')
 </body>
 </html>

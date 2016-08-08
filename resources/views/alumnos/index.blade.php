@@ -42,7 +42,7 @@
                                              <td>{{ $alumno->domicilio  }}</td>
                                              <td>{{ $alumno->localidad }}</td>
                                              @if($alumno->nombretutor)
-                                                <td><a href=""><span> {{ $alumno->nombretutor.' '.$alumno->aptutor.' '.$alumno->amtutor }}  </span></a></td>
+                                                <td><a href="#"><span> {{ $alumno->nombretutor.' '.$alumno->aptutor.' '.$alumno->amtutor }}  </span></a></td>
                                              @else
                                                  <td><a href=""><span>Sin registrar</span></a></td>
                                              @endif
@@ -66,11 +66,5 @@
             </div>
         </div>
     </div>
-
-@endsection
-
-
-@section('script')
-    <script src="{{asset('/js/opcionesMenu.js')}}"></script>
 
 @endsection

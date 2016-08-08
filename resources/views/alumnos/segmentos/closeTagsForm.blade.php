@@ -3,7 +3,7 @@
         {!! Form::submit($etiquetaBoton, ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
 
-        <a href="{{url('/home')}}" class="btn btn-default" role="button">Regresar</a>
+        <a href="{{url('/escuela/alumnos')}}" class="btn btn-default" role="button">Regresar</a>
     </div>
 </div>
 </div>

@@ -3,6 +3,7 @@
 use cteles\Http\Controllers\Controller;
 use cteles\Http\Requests;
 use cteles\Http\Requests\CreateAlumnoRequest;
+use cteles\Http\Requests\EditAlumnoRequest;
 use cteles\Models\Alumno;
 use cteles\Repositorios\AlumnoRepo;
 use cteles\Repositorios\CentrotrabajoRepo;
@@ -105,9 +106,13 @@ class AlumnoController extends Controller{
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
-		dd('formulario para editar alumno');
+	public function edit($alumno_id){
+		$titulo='Editar Datos Alumno';
+        $etiquetaBoton='Actualizar';
+        $alumno=$this->alumnoRepo->findAlumnoById($alumno_id);
+
+        return view('alumnos.edit',compact('titulo','etiquetaBoton','alumno'));
+
 	}
 
 	/**
@@ -116,9 +121,14 @@ class AlumnoController extends Controller{
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, Request $request)
-	{
+	public function update($alumno_id, EditAlumnoRequest $request){
+        if($this->alumnoRepo->update($alumno_id,$request)){
+            Flash::info('Alumnno Actualizado con Exito');
+        }else{
+            Flash::error('No se realizo ningun cambio en la informacion para actualizar');
+        }
 
+        return redirect(url('/escuela/alumnos'));
 	}
 
 	/**

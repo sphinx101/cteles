@@ -67,6 +67,7 @@ class DocenteRepo{
      */
     public function findDocenteByUserId($user_id){
         $user=User::find($user_id);
+
         return $user->docente;
     }
 
