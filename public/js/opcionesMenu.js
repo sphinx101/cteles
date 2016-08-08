@@ -14,8 +14,8 @@ $(document).ready(function(){
             }
 
         },
-        error:function(error){
-            alert('error: '+ ' '+error.toString().valueOf());
+        error:function(data){
+            alert('error: '+ ' '+data);
         }
     });
 
