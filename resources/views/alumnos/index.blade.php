@@ -31,7 +31,7 @@
                                      <th>Localidad</th>
                                      <th>Tutor</th>
 
-                                     <th width="290px">Accion</th>
+                                     <th width="140px">Accion</th>
                                  </thead>
                                  <tbody>
                                  @foreach($alumnos as $alumno)
@@ -49,9 +49,9 @@
 
                                              <td>
                                                     {!! Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}
-                                                        <a href="{!! route('escuela.alumnos.show',[$alumno->id]) !!}" class="btn btn-success" role="button"><i class="material-icons">remove_red_eye</i> </a>
-                                                        <a href="{!! route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info" role="button"><i class="material-icons">mode_edit</i></a>
-                                                        <button class="btn btn-danger" type="submit"><i class="material-icons">delete_forever</i></button>
+
+                                                        <a href="{!! route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info btn-xs" role="button"><i class="material-icons">mode_edit</i></a>
+                                                        <button class="btn btn-danger btn-xs" type="submit"><i class="material-icons">delete_forever</i></button>
 
                                                  {!! Form::close() !!}
                                              </td>
