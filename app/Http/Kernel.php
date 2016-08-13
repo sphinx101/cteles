@@ -11,6 +11,7 @@ class Kernel extends HttpKernel {
 	 */
 	protected $middleware = [
 		'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode',
+		//'cteles\Http\Middleware\Cors',
 		'Illuminate\Cookie\Middleware\EncryptCookies',
 		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
 		'Illuminate\Session\Middleware\StartSession',
@@ -28,6 +29,7 @@ class Kernel extends HttpKernel {
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'cteles\Http\Middleware\RedirectIfAuthenticated',
 		'rolpermiso' => 'cteles\Http\Middleware\RolPermisoMiddleware',
+		//'cors' => 'cteles\Http\Middleware\Cors',
 
 	];
 

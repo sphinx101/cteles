@@ -142,4 +142,20 @@ class AlumnoController extends Controller{
 
 	}
 
+	public function getAlumnoJson($id,Request $request){
+
+		if($request->ajax()){
+			$alumno=$this->alumnoRepo->findAlumnoById($id);
+			//dd(Response::json($alumno));
+			return Response::json($alumno,200);
+		}
+		Flash::error('No es posible procesar su peticion');
+		return redirect(url('/home'));
+	}
+	public function updateAjax($id,Request $request){
+		if($request->ajax()){
+			return response()->json(['mensaje'=>'funciona']);
+		}
+	}
+
 }

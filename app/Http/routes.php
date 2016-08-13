@@ -12,7 +12,6 @@
 */
 
 
-
 Route::get('/', 'WelcomeController@index');
 
 
@@ -43,12 +42,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix'=>'escuela/alumnos/ajax','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>['director','docente']],function(){
 
          Route::get('edicion/{id}','AlumnoController@getAlumnoJson'); //
-         //Route::post('edicion/{id}','AlumnoController@updateAjax');
+         Route::patch('edicion/{id}','AlumnoController@updateAjax');
     });
 
-    Route::group(['namespace'=>'Escuela'],function(){
-        Route::post('edicion/{id}','AlumnoController@updateAjax');
-    });
+    /*Route::group(['namespace'=>'Escuela'],function(){
+        Route::patch('edicion/{id}','AlumnoController@updateAjax');
+    });*/
 
 
     Route::get('existeDocente','HomeController@exist');  //solicitud AJAX

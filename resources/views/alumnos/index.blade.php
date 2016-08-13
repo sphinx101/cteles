@@ -49,11 +49,12 @@
 
                                              <td>
                                                     {!! Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}
+                                                         <button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id={{$alumno->id}}><i class="material-icons">mode_edit</i></button>
 
-                                                        <a href="{!! route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info btn-xs" role="button"><i class="material-icons">mode_edit</i></a>
+                                                        <!--a href="!! //route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info btn-xs" role="button"><i class="material-icons">mode_edit</i></a-->
                                                         <button class="btn btn-danger btn-xs" type="submit"><i class="material-icons">delete_forever</i></button>
 
-                                                 {!! Form::close() !!}
+                                                     {!! Form::close() !!}
                                              </td>
                                          </tr>
                                  @endforeach
@@ -65,10 +66,32 @@
                 </div>
             </div>
         </div>
+    </div> <!-- container -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar Datos</h4>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['role'=>'form','method'=>'PATCH','id'=>'frmEdit']) !!}
+                    @include('alumnos.segmentos.campos')
+
+                </div>
+                <div class="modal-footer">
+                     {!! Form::button('Guardar Cambios', ['class' => 'btn btn-primary btnEditSubmit']) !!}
+                     {!! Form::close() !!}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 @endsection
 @section('script')
     <script src="{{asset('/js/opcionesMenu.js')}}"></script>
-
+    <script src="{{asset('/js/editAlumno.js')}}"></script>
 @endsection
