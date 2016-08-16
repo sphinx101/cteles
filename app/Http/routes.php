@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth'], function(){
          Route::patch('edicion/{id}','AlumnoController@updateAjax');
     });
 
-    /*Route::group(['namespace'=>'Escuela'],function(){
+   /* Route::group(['prefix'=>'escuela/alumnos/ajax','namespace'=>'Escuela'],function(){
         Route::patch('edicion/{id}','AlumnoController@updateAjax');
     });*/
 

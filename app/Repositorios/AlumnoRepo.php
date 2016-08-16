@@ -7,6 +7,7 @@ use cteles\Http\Requests\EditAlumnoRequest;
 use cteles\Models\Alumno;
 use cteles\Models\Centrotrabajo;
 use cteles\User;
+use Illuminate\Support\Facades\Request;
 
 class AlumnoRepo{
 
@@ -39,14 +40,28 @@ class AlumnoRepo{
      * @return bool|mixed
      */
     public function update($alumno_id, EditAlumnoRequest $request){
+
         $alumno=Alumno::find($alumno_id);
         return $this->changeFieldValueAlumno($alumno, $request) ? $alumno->save() : false;
 
     }
 
+
     public function delete($alumno_id){}
 
 
+    public function retrieveAlumnoTutor($id){
+        $alumnos=null;
+        $ct=$this->findCentroTrabajoByUser(\Auth::user()->id);
+
+        $alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
+            ->leftjoin('padretutores as pt','pt.alumno_id','=','alumnos.id')
+            ->where('ct.id','=',$ct->id)
+            ->where('alumnos.id','=',$id)
+            ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor')->first();
+
+        return $alumnos;
+    }
 
     public function findAlumnoById($alumno_id){
         //dd(Alumno::find($alumno_id));

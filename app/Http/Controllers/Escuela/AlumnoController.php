@@ -152,9 +152,34 @@ class AlumnoController extends Controller{
 		Flash::error('No es posible procesar su peticion');
 		return redirect(url('/home'));
 	}
-	public function updateAjax($id,Request $request){
+	public function updateAjax($id,EditAlumnoRequest $request){
+
 		if($request->ajax()){
-			return response()->json(['mensaje'=>'funciona']);
+            $booAlumno=$this->alumnoRepo->update($id,$request);
+			if($booAlumno){
+                $alumno=$this->alumnoRepo->retrieveAlumnoTutor($id);
+				$a=([
+					'id'=>$alumno->id,
+					'curp'=>$alumno->curp,
+					'nombre'=>$alumno->nombre,
+					'appaterno'=>$alumno->appaterno,
+					'apmaterno'=>$alumno->apmaterno,
+					'localidad'=>$alumno->localidad,
+					'domicilio'=>$alumno->domicilio,
+					'nombretutor'=>$alumno->nombretutor,
+					'aptutor'=>$alumno->aptutor,
+					'amtutor'=>$alumno->amtutor,
+                    'status'=>'1'
+				]);
+			}else{
+				$a=([
+
+					'status'=>'0'
+				]);
+			}
+
+
+			return response()->json($a);
 		}
 	}
 

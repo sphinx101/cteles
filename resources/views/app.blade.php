@@ -19,6 +19,9 @@
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
+	<!-- toastrjs notificaciones -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css">
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -93,6 +96,8 @@
 	<script src="{{asset('/js/material.min.js')}}"></script>
 	<script src="{{asset('/js/ripples.min.js')}}"></script>
 
+	<!--toastrjs notification -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
 	@yield('script')
 </body>
 </html>

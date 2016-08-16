@@ -35,8 +35,9 @@ class EditAlumnoRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			'curp'=>'required|unique:alumnos,curp,'.$this->route->getParameter('alumnos'),
+
+		 return [
+			'curp'=>'required|min:18|max:18',
 			'nombre'=>'required',
 			'appaterno'=>'required',
 			'apmaterno'=>'required'

@@ -27,7 +27,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="d55bd87a-9e87-4045-8ffb-a83dee89ae37">
-      <console name="cteles DB" type="STANDARD"><![CDATA[select * from docentes;]]></console>
+      <console name="cteles DB" type="STANDARD"><![CDATA[select * from alumnos;]]></console>
       <console name="cteles DB 1" type="STANDARD"><![CDATA[show table]]></console>
     </connection>
   </component>

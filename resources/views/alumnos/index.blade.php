@@ -23,7 +23,7 @@
                             <div class="well text-center">No Existen Alumnos Registrados</div>
                         @else
                             <table class="table table-hover">
-                                 <thead>
+                                 <thead id="tblHeader">
                                      <th>ID</th>
                                      <th>Nombre</th>
                                      <th>CURP</th>
@@ -35,7 +35,7 @@
                                  </thead>
                                  <tbody>
                                  @foreach($alumnos as $alumno)
-                                         <tr>
+                                         <tr id='alumno{{$alumno->id}}'>
                                              <td>{{ $alumno->id  }}</td>
                                              <td>{{ $alumno->nombre.' '.$alumno->appaterno.' '.$alumno->apmaterno }}</td>
                                              <td>{{ $alumno->curp }}</td>
@@ -48,13 +48,13 @@
                                              @endif
 
                                              <td>
-                                                    {!! Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}
+                                                    <!-- //Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}-->
                                                          <button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id={{$alumno->id}}><i class="material-icons">mode_edit</i></button>
 
                                                         <!--a href="!! //route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info btn-xs" role="button"><i class="material-icons">mode_edit</i></a-->
-                                                        <button class="btn btn-danger btn-xs" type="submit"><i class="material-icons">delete_forever</i></button>
+                                                        <button class="btn btn-danger btn-xs" type="button"><i class="material-icons">delete_forever</i></button>
 
-                                                     {!! Form::close() !!}
+                                                     <!--!! //Form::close() !!}-->
                                              </td>
                                          </tr>
                                  @endforeach
