@@ -115,7 +115,7 @@
           e.preventDefault();
           alumno_id=$((this)).data('alumno_id');
 
-          alert('alumno_id: '+alumno_id);
+          alert('clave alumno: '+alumno_id);
       });
 
    });
