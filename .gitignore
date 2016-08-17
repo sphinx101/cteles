@@ -1,6 +1,11 @@
 /vendor
 /node_modules
 .env
+/bootstrap
+/spec
+readme.md
+server.php
+artisan.php
 cteles.sublime-project
 cteles.sublime-workspace
 

@@ -111,5 +111,12 @@
 
       });
 
+      $('.btnDeleteSubmit').on('click',function(e){
+          e.preventDefault();
+          alumno_id=$((this)).data('alumno_id');
+
+          alert('alumno_id: '+alumno_id);
+      });
+
    });
 })(jQuery);

@@ -52,7 +52,7 @@
                                                          <button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id={{$alumno->id}}><i class="material-icons">mode_edit</i></button>
 
                                                         <!--a href="!! //route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info btn-xs" role="button"><i class="material-icons">mode_edit</i></a-->
-                                                        <button class="btn btn-danger btn-xs" type="button"><i class="material-icons">delete_forever</i></button>
+                                                        <button class="btn btn-danger btn-xs btnDeleteSubmit" data-alumno_id={{$alumno->id}} type="button"><i class="material-icons">delete_forever</i></button>
 
                                                      <!--!! //Form::close() !!}-->
                                              </td>
