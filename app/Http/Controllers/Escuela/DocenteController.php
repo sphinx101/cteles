@@ -110,7 +110,7 @@ class DocenteController extends Controller {
 	public function update($id_docente,EditDocenteRequest $request)	{
         $mensaje=null;
 		$url=null;
-		dd($request->all());
+		//dd($request->all());
 
         if($this->docenteRepo->update($id_docente,$request)){
             $mensaje='Informacion Actualizada con Exito!!!';
