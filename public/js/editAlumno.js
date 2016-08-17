@@ -63,7 +63,7 @@
 
               },
               success:function(data){
-                 var mensaje='No se realizo ningun cambio en la informacion para ';
+                 var mensaje='No se realizo ningun cambio en la informacion para actualizar ';
                  if(data.status=='1') {
 
                      var tutor = 'Sin registrar';
