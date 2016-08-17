@@ -9,8 +9,8 @@
 
 
 
-      $('.btnEdit').on('click',function(e){
-          e.preventDefault();
+      $('.btnEdit').on('click',function(){
+
           alumno_id=($(this).data('alumno_id'));
 
           $.ajax({
@@ -70,22 +70,23 @@
                      if (data.nombretutor != null)
                          tutor = data.nombretutor + ' ' + data.aptutor + ' ' + data.amtutor;
 
-
+/*
                      tr = '<tr id="alumno' + data.id + '">' +
                          '   <td>' + data.id + '</td>' +
                          '   <td>' + data.nombre + ' ' + data.appaterno + ' ' + data.apmaterno + '</td>' +
                          '   <td>' + data.curp + '</td>' +
                          '   <td>' + data.domicilio + '</td>' +
                          '   <td>' + data.localidad + '</td>' +
-                         '   <td><a href="#"><span>' + tutor + '</span></a></td>' +
-                         '   <td>' +
-                         '<button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id=""' + data.id + '"><i class="material-icons">mode_edit</i></button>' +
-                         '<button class="btn btn-danger btn-xs btnDeleteSubmit" data-alumno_id="'+data.id +'type="button"><i class="material-icons">delete_forever</i></button>' +
-                         '   </td>' +
-                         '</tr>';
+                         '   <td><a href="#"><span>' + tutor + '</span></a></td>';
+                      tr+='<td>' +
+                             '<button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id="' + data.id + '"><i class="material-icons">mode_edit</i></button>';
+                      tr+='<button class="btn btn-danger btn-xs btnDeleteSubmit btnDelete" data-alumno_id="'+data.id +'" type="button"><i class="material-icons">delete_forever</i></button></td></tr>';
+
+                     console.log(tr);
 
 
-                     $('#alumno' + alumno_id).replaceWith(tr);
+                     $('#alumno' + alumno_id).replaceWith(tr);*/
+
                      $('#myModal').modal('hide');
                      mensaje='Informacion Actualizada con Exito';
                  }
