@@ -80,7 +80,7 @@
                          '   <td><a href="#"><span>' + tutor + '</span></a></td>' +
                          '   <td>' +
                          '<button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id=""' + data.id + '"><i class="material-icons">mode_edit</i></button>' +
-                         '<button class="btn btn-danger btn-xs" type="button"><i class="material-icons">delete_forever</i></button>' +
+                         '<button class="btn btn-danger btn-xs btnDeleteSubmit" data-alumno_id="'+data.id +'type="button"><i class="material-icons">delete_forever</i></button>' +
                          '   </td>' +
                          '</tr>';
 
