@@ -45,7 +45,7 @@
 
       $('.btnEditSubmit').on('click',function(e){
           e.preventDefault();
-
+          e.stopPropagation();
           $.ajaxSetup({
 
 
