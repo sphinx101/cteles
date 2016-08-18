@@ -1,15 +1,15 @@
 (function($){
    $(document).on('ready',function(){
-      var url_edit='';
-      var alumnoJSON='';
+
+
       var alumno_id='';
       $frmEdit=$('#frmEdit');
-      //$frmBorrar=$('#frmBorrar');
 
 
 
 
-      $('.btnEdit').on('click',function(){
+
+      $(document).on('click','.btnEdit',function(){
 
           alumno_id=($(this).data('alumno_id'));
 
@@ -19,18 +19,7 @@
               datatype: 'json',
 
               success:function(data){
-                 //console.log(data);
-                 /*var alumno=[
-                     {'id':'data.id',
-                     'centrotrabajo_id':data.centrotrabajo_id,
-                     'nombre':data.nombre,
-                     'curp':data.curp,
-                     'appaterno':data.appaterno,
-                     'apmaterno':data.apmaterno,
-                     'localidad':data.localidad,
-                     'domicilio':data.domicilio}
-                 ];
-                 alumnoJSON=JSON.stringify(alumno);*/
+
                  $('.lblcurp').val(data.curp);
                  $('.lblnombre').val(data.nombre);
                  $('.lblpaterno').val(data.appaterno);
@@ -45,7 +34,7 @@
 
       $('.btnEditSubmit').on('click',function(e){
           e.preventDefault();
-          e.stopPropagation();
+
           $.ajaxSetup({
 
 
@@ -70,7 +59,7 @@
                      if (data.nombretutor != null)
                          tutor = data.nombretutor + ' ' + data.aptutor + ' ' + data.amtutor;
 
-/*
+
                      tr = '<tr id="alumno' + data.id + '">' +
                          '   <td>' + data.id + '</td>' +
                          '   <td>' + data.nombre + ' ' + data.appaterno + ' ' + data.apmaterno + '</td>' +
@@ -82,10 +71,8 @@
                              '<button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id="' + data.id + '"><i class="material-icons">mode_edit</i></button>';
                       tr+='<button class="btn btn-danger btn-xs btnDeleteSubmit btnDelete" data-alumno_id="'+data.id +'" type="button"><i class="material-icons">delete_forever</i></button></td></tr>';
 
-                     console.log(tr);
 
-
-                     $('#alumno' + alumno_id).replaceWith(tr);*/
+                     $('#alumno' + alumno_id).replaceWith(tr);
 
                      $('#myModal').modal('hide');
                      mensaje='Informacion Actualizada con Exito';
@@ -107,12 +94,12 @@
                   }
               }
           });
-
+          $frmEdit[0].reset();
 
 
       });
 
-      $('.btnDeleteSubmit').on('click',function(e){
+      $(document).on('click','.btnDeleteSubmit',function(e){
           e.preventDefault();
           alumno_id=$((this)).data('alumno_id');
 
