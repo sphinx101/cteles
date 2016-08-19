@@ -122,13 +122,13 @@ class AlumnoController extends Controller{
 	 * @return Response
 	 */
 	public function update($alumno_id, EditAlumnoRequest $request){
-       /* if($this->alumnoRepo->update($alumno_id,$request)){
+        if($this->alumnoRepo->update($alumno_id,$request)){
             Flash::info('Alumnno Actualizado con Exito');
         }else{
             Flash::error('No se realizo ningun cambio en la informacion para actualizar');
         }
 
-        return redirect(url('/escuela/alumnos'));*/
+        return redirect(url('/escuela/alumnos'));
 	}
 
 	/**
