@@ -52,7 +52,8 @@
 
               },
               success:function(data){
-                 var mensaje='No se realizo ningun cambio en la informacion para actualizar ';
+                //console.log(data);
+
                  if(data.status=='1') {
 
                      var tutor = 'Sin registrar';
@@ -73,11 +74,11 @@
 
 
                      $('#alumno' + alumno_id).replaceWith(tr);
-
+                     $frmEdit[0].reset();
                      $('#myModal').modal('hide');
-                     mensaje='Informacion Actualizada con Exito';
+
                  }
-                 toastr.success(mensaje,'Aviso');
+                 toastr.success(data.mensaje,'Aviso');
 
 
               },
@@ -86,15 +87,15 @@
                   if(xhr.status==422) {
                       var errors = jQuery.parseJSON(xhr.responseText);
                       var errorsHtml = '';
-
+                      console.log(errors);
                       $.each(errors, function (key, value) {
-                          errorsHtml += '<li>' + value[0] + '</li>';
+                          errorsHtml += '<li>' + value + '</li>';
                       });
                       toastr.error(errorsHtml, 'Error ');
                   }
               }
           });
-          $frmEdit[0].reset();
+
 
 
       });

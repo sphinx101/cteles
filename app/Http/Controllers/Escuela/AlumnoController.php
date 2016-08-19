@@ -122,13 +122,13 @@ class AlumnoController extends Controller{
 	 * @return Response
 	 */
 	public function update($alumno_id, EditAlumnoRequest $request){
-        if($this->alumnoRepo->update($alumno_id,$request)){
+       /* if($this->alumnoRepo->update($alumno_id,$request)){
             Flash::info('Alumnno Actualizado con Exito');
         }else{
             Flash::error('No se realizo ningun cambio en la informacion para actualizar');
         }
 
-        return redirect(url('/escuela/alumnos'));
+        return redirect(url('/escuela/alumnos'));*/
 	}
 
 	/**
@@ -155,31 +155,47 @@ class AlumnoController extends Controller{
 	public function updateAjax($id,EditAlumnoRequest $request){
 
 		if($request->ajax()){
-            $booAlumno=$this->alumnoRepo->update($id,$request);
-			if($booAlumno){
-                $alumno=$this->alumnoRepo->retrieveAlumnoTutor($id);
-				$a=([
-					'id'=>$alumno->id,
-					'curp'=>$alumno->curp,
-					'nombre'=>$alumno->nombre,
-					'appaterno'=>$alumno->appaterno,
-					'apmaterno'=>$alumno->apmaterno,
-					'localidad'=>$alumno->localidad,
-					'domicilio'=>$alumno->domicilio,
-					'nombretutor'=>$alumno->nombretutor,
-					'aptutor'=>$alumno->aptutor,
-					'amtutor'=>$alumno->amtutor,
-                    'status'=>'1'
-				]);
-			}else{
-				$a=([
+            $respuesta=$this->alumnoRepo->update($id,$request);
 
-					'status'=>'0'
-				]);
+			switch($respuesta['http_respuesta']){
+				case 200:
+					if($respuesta['modificado']==100){     // VALOR DE 100 PARA "MODIFICADO",
+						$alumno=$this->alumnoRepo->retrieveAlumnoTutor($id);
+						$a=([
+							'id'=>$alumno->id,
+							'curp'=>$alumno->curp,
+							'nombre'=>$alumno->nombre,
+							'appaterno'=>$alumno->appaterno,
+							'apmaterno'=>$alumno->apmaterno,
+							'localidad'=>$alumno->localidad,
+							'domicilio'=>$alumno->domicilio,
+							'nombretutor'=>$alumno->nombretutor,
+							'aptutor'=>$alumno->aptutor,
+							'amtutor'=>$alumno->amtutor,
+							'status'=>'1',
+							'mensaje'=>'Informacion Actualizada con Exito'
+						]);
+					}else{   //VALOR DE 101 PARA "SIN MODIFICAR"
+						$a=([
+
+							'status'=>'0',
+							'mensaje'=>'No se realizo ningun cambio en la informacion para actualizar'
+						]);
+					}
+
+					break;
+				case 422:  // Cuando la curp ya existe en la base de datos
+					$a=([
+                        'mensaje'=>'CURP ya existe en la base de datos.'
+
+					]);
+					break;
 			}
 
+            return response()->json($a,$respuesta['http_respuesta']);
 
-			return response()->json($a);
+
+
 		}
 	}
 

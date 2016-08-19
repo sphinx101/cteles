@@ -7,7 +7,9 @@ use cteles\Http\Requests\EditAlumnoRequest;
 use cteles\Models\Alumno;
 use cteles\Models\Centrotrabajo;
 use cteles\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AlumnoRepo{
 
@@ -40,9 +42,46 @@ class AlumnoRepo{
      * @return bool|mixed
      */
     public function update($alumno_id, EditAlumnoRequest $request){
+        $OK_HTTP=200;
+        $FAIL_HTTP=422;
+        $ISUPDATE=100;
+        $NOUPDATE=101;
+
+        $http_respuesta=0;
 
         $alumno=Alumno::find($alumno_id);
-        return $this->changeFieldValueAlumno($alumno, $request) ? $alumno->save() : false;
+
+        try{
+            $alumno_temp=Alumno::where('curp',$request->get('curp'))->firstOrFail();
+            if($alumno_id==$alumno_temp->id){
+                if($this->changeFieldValueAlumno($alumno,$request)){
+                    $modificado=$ISUPDATE;
+                    $alumno->save();
+                }else{
+                    $modificado=$NOUPDATE;
+                }
+                $http_respuesta=$OK_HTTP;
+                //return $this->changeFieldValueAlumno($alumno, $request) ? $alumno->save() : false;
+            }else{
+                $http_respuesta=$FAIL_HTTP;
+                $modificado=$NOUPDATE;
+            }
+        }catch (ModelNotFoundException $e){
+            if($this->changeFieldValueAlumno($alumno,$request)){
+                $modificado=$ISUPDATE;
+                $alumno->save();
+            }
+            $http_respuesta=$OK_HTTP;
+        }
+
+
+        $respuesta= [
+            'modificado'=>$modificado,
+            'http_respuesta'=>$http_respuesta
+        ];
+        return $respuesta;
+
+       // return $this->changeFieldValueAlumno($alumno, $request) ? $alumno->save() : false;
 
     }
 
