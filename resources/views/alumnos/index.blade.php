@@ -31,28 +31,30 @@
                                      <th>Localidad</th>
                                      <th>Tutor</th>
 
-                                     <th width="140px">Accion</th>
-                                 </thead>
-                                 <tbody>
-                                 @foreach($alumnos as $alumno)
-                                         <tr id='alumno{{$alumno->id}}'>
-                                             <td>{{ $alumno->id  }}</td>
-                                             <td>{{ $alumno->nombre.' '.$alumno->appaterno.' '.$alumno->apmaterno }}</td>
-                                             <td>{{ $alumno->curp }}</td>
-                                             <td>{{ $alumno->domicilio  }}</td>
-                                             <td>{{ $alumno->localidad }}</td>
-                                             @if($alumno->nombretutor)
-                                                <td><a href="#"><span> {{ $alumno->nombretutor.' '.$alumno->aptutor.' '.$alumno->amtutor }}  </span></a></td>
-                                             @else
-                                                 <td><a href=""><span>Sin registrar</span></a></td>
-                                             @endif
+                                         <th width="140px">Accion</th>
+                                     </thead>
+                                     <tbody>
+                                     @foreach($alumnos as $alumno)
+                                             <tr id='alumno{{$alumno->id}}'>
+                                                 <td>{{ $alumno->id  }}</td>
+                                                 <td>{{ $alumno->nombre.' '.$alumno->appaterno.' '.$alumno->apmaterno }}</td>
+                                                 <td>{{ $alumno->curp }}</td>
+                                                 <td>{{ $alumno->domicilio  }}</td>
+                                                 <td>{{ $alumno->localidad }}</td>
+                                                 @if($alumno->nombretutor)
+                                                    <td><a href="#"><span> {{ $alumno->nombretutor.' '.$alumno->aptutor.' '.$alumno->amtutor }}  </span></a></td>
+                                                 @else
+                                                     <td><a href=""><span>Sin registrar</span></a></td>
+                                                 @endif
 
-                                             <td>
-                                                    <!-- //Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}-->
-                                                         <button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id={{$alumno->id}}><i class="material-icons">mode_edit</i></button>
+                                                 <td>
+                                                        <!-- //Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}-->
+                                                             <button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id={{$alumno->id}}><i class="material-icons">mode_edit</i></button>
 
-                                                        <!--a href="!! //route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info btn-xs" role="button"><i class="material-icons">mode_edit</i></a-->
-                                                        <button class="btn btn-danger btn-xs btnDeleteSubmit" data-alumno_id={{$alumno->id}} type="button"><i class="material-icons">delete_forever</i></button>
+                                                            <!--a href="!! //route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info btn-xs" role="button"><i class="material-icons">mode_edit</i></a-->
+                                                            <button type="button" class="btn btn-danger btn-xs btnDelete" data-toggle="modal" data-target="#myModal2"
+                                                                    data-alumno_id={{$alumno->id}} data-alumno_nombre={{$alumno->nombre}} data-alumno_app={{$alumno->appaterno}} data-alumno_apm={{$alumno->apmaterno}}>
+                                                                    <i class="material-icons">delete_forever</i></button>
 
                                                      <!--!! //Form::close() !!}-->
                                              </td>
@@ -68,28 +70,51 @@
         </div>
     </div> <!-- container -->
 
-    <!-- Modal -->
+    <!-- Modal para Editar-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Editar Datos</h4>
-                </div>
-                <div class="modal-body">
-                    {!! Form::open(['role'=>'form','method'=>'PATCH','id'=>'frmEdit']) !!}
-                    @include('alumnos.segmentos.campos')
+                <div class="panel panel-primary">
+                    <div class="modal-header panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Editar Datos</h4>
+                    </div>
+                    <div class="modal-body panel-body">
+                        {!! Form::open(['role'=>'form','method'=>'PATCH','id'=>'frmEdit']) !!}
+                        @include('alumnos.segmentos.campos')
 
-                </div>
-                <div class="modal-footer">
-                     {!! Form::button('Guardar Cambios', ['class' => 'btn btn-primary btnEditSubmit']) !!}
-                     {!! Form::close() !!}
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                    <div class="modal-footer panel-footer">
+                         {!! Form::button('Guardar Cambios', ['class' => 'btn btn-primary btnEditSubmit']) !!}
+                         {!! Form::close() !!}
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- Modal para Eliminar-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="panel panel-warning">
+                    <div class="modal-header panel-heading">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                       <h4 class="modal-title" id="myModalLabel2">Eliminar Alumno</h4>
+                    </div>
+                    <div class="modal-body panel-body">
+                      {!! Form::open(['role'=>'form','method'=>'DELETE','id'=>'frmBorrar']) !!}
+                      {!! Form::label('',null,array('id'=>'lblPregunta')) !!}
+                    </div>
+                    <div class="modal-footer panel-footer">
+                       {!! Form::button('Eliminar', ['class' => 'btn btn-primary btnDeleteSubmit']) !!}
+                       {!! Form::close() !!}
+                       <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
     <script src="{{asset('/js/opcionesMenu.js')}}"></script>

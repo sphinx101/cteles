@@ -86,7 +86,10 @@ class AlumnoRepo{
     }
 
 
-    public function delete($alumno_id){}
+    public function delete($alumno_id){
+        $alumno=Alumno::find($alumno_id);
+        return $alumno->delete();
+    }
 
 
     public function retrieveAlumnoTutor($id){

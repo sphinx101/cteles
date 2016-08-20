@@ -38,6 +38,7 @@ class AlumnoController extends Controller{
 	/**
 	 * Display a listing of the Alumno.
 	 *
+	 * @param Request $request
 	 * @return Response
 	 */
 	public function index(Request $request){
@@ -53,7 +54,6 @@ class AlumnoController extends Controller{
 		}
         $curp_request=\Request::all();
 		$TituloTabla=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
-
 
 		return view('alumnos.index',compact('TituloTabla','alumnos','curp_request'));
 
@@ -76,9 +76,10 @@ class AlumnoController extends Controller{
 	/**
 	 * Store a newly created Alumno in storage.
 	 *
-	 * @param CreateAlumnoRequest $request
-	 *
+	 * @param CreateAlumnoRequest $input
 	 * @return Response
+
+	 *
 	 */
 	public function store(CreateAlumnoRequest $input){
 
@@ -118,8 +119,10 @@ class AlumnoController extends Controller{
 	/**
 	 * Update the specified Alumno in storage.
 	 *
-	 * @param  int  $id
+	 * @param $alumno_id
+	 * @param EditAlumnoRequest $request
 	 * @return Response
+
 	 */
 	public function update($alumno_id, EditAlumnoRequest $request){
         if($this->alumnoRepo->update($alumno_id,$request)){
@@ -137,21 +140,49 @@ class AlumnoController extends Controller{
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id,Request $request){
+		if($request->ajax()){
+
+			if($this->alumnoRepo->delete($id)){
+				$rs=[
+				   'id'=>$id,
+				   'status'=>'ok',
+				   'mensaje'=>'Alumno Eliminado',
+				];
+			}
+
+			return response()->json($rs,200);
+		}
+		return response()->json([
+
+			                    'mensaje'=>'Error al eliminar el registro',
+		                        ],422);
+
 
 	}
 
+
+	/**
+	 * @param $id
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+     */
 	public function getAlumnoJson($id,Request $request){
 
 		if($request->ajax()){
 			$alumno=$this->alumnoRepo->findAlumnoById($id);
 			//dd(Response::json($alumno));
-			return Response::json($alumno,200);
+			return response()->json($alumno,200);
 		}
 		Flash::error('No es posible procesar su peticion');
 		return redirect(url('/home'));
 	}
+
+	/**
+	 * @param $id
+	 * @param EditAlumnoRequest $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+     */
 	public function updateAjax($id,EditAlumnoRequest $request){
 
 		if($request->ajax()){
@@ -198,5 +229,7 @@ class AlumnoController extends Controller{
 
 		}
 	}
+
+
 
 }

@@ -6,6 +6,13 @@
       $frmEdit=$('#frmEdit');
 
 
+       $.ajaxSetup({
+
+
+           headers: {
+               'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+           }
+       });
 
 
 
@@ -35,14 +42,6 @@
       $('.btnEditSubmit').on('click',function(e){
           e.preventDefault();
 
-          $.ajaxSetup({
-
-
-             headers: {
-                  'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-              }
-          });
-
           $.ajax({
               url:'/escuela/alumnos/ajax/edicion/'+alumno_id,
               type: 'PATCH',
@@ -69,8 +68,8 @@
                          '   <td>' + data.localidad + '</td>' +
                          '   <td><a href="#"><span>' + tutor + '</span></a></td>';
                       tr+='<td>' +
-                             '<button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id="' + data.id + '"><i class="material-icons">mode_edit</i></button>';
-                      tr+='<button class="btn btn-danger btn-xs btnDeleteSubmit btnDelete" data-alumno_id="'+data.id +'" type="button"><i class="material-icons">delete_forever</i></button></td></tr>';
+                          '<button type="button" class="btn btn-primary btn-xs btnEdit"   data-toggle="modal" data-target="#myModal"  data-alumno_id="' + data.id + '"><i class="material-icons">mode_edit</i></button>';
+                      tr+='<button type="button" class="btn btn-danger btn-xs  btnDelete" data-toggle="modal" data-target="#myModal2" data-alumno_id="'+data.id +'" data-alumno_nombre="'+data.nombre+'" data-alumno_app="'+data.appaterno+'" data-alumno_apm="'+data.apmaterno+'"><i class="material-icons">delete_forever</i></button></td></tr>';
 
 
                      $('#alumno' + alumno_id).replaceWith(tr);
@@ -100,11 +99,41 @@
 
       });
 
-      $(document).on('click','.btnDeleteSubmit',function(e){
-          e.preventDefault();
-          alumno_id=$((this)).data('alumno_id');
+      $(document).on('click','.btnDelete',function(){
+         alumno_id=($(this)).data('alumno_id');
+         $lblPregunta=$('#lblPregunta');
 
-          alert('clave alumno: '+alumno_id);
+         var pregunta='¿ Esta seguro que desea eliminar al alumno '
+                      +($(this)).data('alumno_nombre')+' '
+                      +($(this)).data('alumno_app')+' '
+                      +($(this)).data('alumno_apm')+' ?'
+         $lblPregunta.text(pregunta);
+      });
+      $('.btnDeleteSubmit').on('click',function(e){
+           e.preventDefault();
+
+          $.ajax({
+               url: '/escuela/alumnos/'+alumno_id,
+               type: 'DELETE',
+               datatype: 'json',
+               success:function(data){
+
+
+                   $('#myModal2').modal('hide');
+                   toastr.success('#'+data.id+' '+data.mensaje,'Aviso');
+                   $('#alumno' + alumno_id).remove();
+
+               },
+               error:function(xhr){
+                   var errors = jQuery.parseJSON(xhr.responseText);
+                   var errorsHtml = '';
+                   console.log(errors);
+                   $.each(errors, function (key, value) {
+                        errorsHtml += '<li>' + value + '</li>';
+                   });
+                   toastr.error(errorsHtml, 'Error');
+               }
+          });
       });
 
    });

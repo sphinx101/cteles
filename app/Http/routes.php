@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function(){
 
          Route::get('edicion/{id}','AlumnoController@getAlumnoJson'); //
          Route::patch('edicion/{id}','AlumnoController@updateAjax');
+
     });
 
    /* Route::group(['prefix'=>'escuela/alumnos/ajax','namespace'=>'Escuela'],function(){
