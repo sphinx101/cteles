@@ -120,7 +120,7 @@
 
 
                    $('#myModal2').modal('hide');
-                   toastr.success('#'+data.id+' '+data.mensaje,'Aviso');
+                   toastr.info('ID: '+data.id+' '+data.mensaje,'Aviso');
                    $('#alumno' + alumno_id).remove();
 
                },

@@ -30,50 +30,15 @@
 
     <!-- TODO: separar en partials las ventanas modales-->
     <!-- Modal para Editar-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="panel panel-primary">
-                    <div class="modal-header panel-heading">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Editar Datos</h4>
-                    </div>
-                    <div class="modal-body panel-body">
-                        {!! Form::open(['role'=>'form','method'=>'PATCH','id'=>'frmEdit']) !!}
-                        @include('alumnos.segmentos.campos')
-
-                    </div>
-                    <div class="modal-footer panel-footer">
-                         {!! Form::button('Guardar Cambios', ['class' => 'btn btn-primary btnEditSubmit']) !!}
-                         {!! Form::close() !!}
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('partials.modalOpenEdit')
+        {!! Form::open(['role'=>'form','method'=>'PATCH','id'=>'frmEdit']) !!}
+        @include('alumnos.segmentos.campos')
+    @include('partials.modalCloseEdit')
     <!-- Modal para Eliminar-->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="panel panel-warning">
-                    <div class="modal-header panel-heading">
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                       <h4 class="modal-title" id="myModalLabel2">Eliminar Alumno</h4>
-                    </div>
-                    <div class="modal-body panel-body">
-                      {!! Form::open(['role'=>'form','method'=>'DELETE','id'=>'frmBorrar']) !!}
-                      {!! Form::label('',null,array('id'=>'lblPregunta')) !!}
-                    </div>
-                    <div class="modal-footer panel-footer">
-                       {!! Form::button('Eliminar', ['class' => 'btn btn-primary btnDeleteSubmit']) !!}
-                       {!! Form::close() !!}
-                       <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('partials.modalOpenDelete')
+        {!! Form::open(['role'=>'form','method'=>'DELETE','id'=>'frmBorrar']) !!}
+        {!! Form::label('',null,array('id'=>'lblPregunta')) !!}
+    @include('partials.modalCloseDelete')
 @endsection
 @section('script')
     <script src="{{asset('/js/opcionesMenu.js')}}"></script>
