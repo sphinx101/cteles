@@ -24,7 +24,7 @@ class AlumnoRepo{
                  ->orderby('alumnos.id')
                  ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor');
 
-        return $alumnos->paginate(10);
+        return $alumnos->paginate(5);
 
     }
 
@@ -120,7 +120,7 @@ class AlumnoRepo{
             ->orderby('alumnos.id')
             ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor');
 
-        return $alumnos->paginate(10);
+        return $alumnos->paginate(5);
     }
 
     public function findCentroTrabajoByUser($user_id){

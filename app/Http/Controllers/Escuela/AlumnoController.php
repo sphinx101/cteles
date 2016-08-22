@@ -54,7 +54,9 @@ class AlumnoController extends Controller{
 		}
         $curp_request=\Request::all();
 		$TituloTabla=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
-
+        if($request->ajax()){
+			return view('alumnos.tabladatos',compact('TituloTabla','alumnos','curp_request'));
+		}
 		return view('alumnos.index',compact('TituloTabla','alumnos','curp_request'));
 
 	}
