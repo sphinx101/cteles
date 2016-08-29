@@ -164,8 +164,8 @@ class CreateDbCteles extends Migration {
 		Schema::create('padretutores', function(Blueprint $table)
 		{
 		    $table->increments('id');
-		    $table->integer('alumno_id')->unsigned();
-		    $table->foreign('alumno_id')->references('id')->on('alumnos')->onUpdate('cascade')->onDelete('cascade'); //relacion alumno-padrestutores
+		   // $table->integer('alumno_id')->unsigned();
+		   // $table->foreign('alumno_id')->references('id')->on('alumnos')->onUpdate('cascade')->onDelete('cascade'); //relacion alumno-padrestutores
 			$table->string('nombre',20);		    
 			$table->string('appaterno',20);		    
 			$table->string('apmaterno',20);
@@ -220,6 +220,17 @@ class CreateDbCteles extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 		});
+		Schema::create('alumno_padretutor', function(Blueprint $table)      // tabla pivote alumnos-padretutores
+		{
+
+			$table->integer('alumno_id')->unsigned();
+			$table->foreign('alumno_id')->references('id')->on('alumnos')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('padretutor_id')->unsigned();
+			$table->foreign('padretutor_id')->references('id')->on('padretutores')->onUpdate('cascade')->onDelete('cascade');
+			$table->timestamps();
+		});
+
+
 
 
 
@@ -233,6 +244,7 @@ class CreateDbCteles extends Migration {
 	 */
 	public function down()
 	{
+		Schema::drop('alumno_padretutor');
 		Schema::drop('calificaciones');
 		Schema::drop('padretutores');
 		Schema::drop('asistencias');

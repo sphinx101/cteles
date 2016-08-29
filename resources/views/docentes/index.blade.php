@@ -20,7 +20,7 @@
                                     <th>CURP</th>
                                     <th># Celular</th>
                                     <th># Tel. Part.</th>
-                                    <th width="290px">Accion</th>
+                                    <th width="200px">Accion</th>
                                 </thead>
                                 <tbody>
 
@@ -36,9 +36,9 @@
                                         <td>
 
                                             {!! Form::open(['route'=>['escuela.docentes.destroy',$docente->id],'method'=>'DELETE','id'=>'frmBorrar']) !!}
-                                                <a href="{!! route('escuela.docentes.show',[$docente->id]) !!}" class="btn btn-success" role="button"><i class="material-icons">remove_red_eye</i> </a>
-                                                <a href="{!! route('escuela.docentes.edit', [$docente->id]) !!}" class="btn btn-info" role="button"><i class="material-icons">mode_edit</i></a>
-                                                <button class="btn btn-danger" type="submit"><i class="material-icons">delete_forever</i></button>
+                                                <a href="{!! route('escuela.docentes.show',[$docente->id]) !!}" class="btn btn-success btn-xs" role="button"><i class="material-icons">remove_red_eye</i> </a>
+                                                <a href="{!! route('escuela.docentes.edit', [$docente->id]) !!}" class="btn btn-primary btn-xs" role="button"><i class="material-icons">mode_edit</i></a>
+                                                <button class="btn btn-danger btn-xs" type="submit"><i class="material-icons">delete_forever</i></button>
 
                                             {!! Form::close() !!}
 

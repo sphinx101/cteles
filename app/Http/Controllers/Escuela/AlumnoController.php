@@ -44,19 +44,22 @@ class AlumnoController extends Controller{
 	public function index(Request $request){
         $curp=$request->get('curp');
 
-		if(!isset($curp) && trim($curp)!='') {
+		if(!isset($curp) || trim($curp)==='') {
 
 			$alumnos = $this->alumnoRepo->all();
 		}
 		else{
+
 			$alumnos=$this->alumnoRepo->retrieveAlumnoByCurp($curp);
 
 		}
         $curp_request=\Request::all();
 		$TituloTabla=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
         if($request->ajax()){
+
 			return view('alumnos.tabladatos',compact('TituloTabla','alumnos','curp_request')); //paginacion via ajax
 		}
+        //return response()->json($alumnos);
 		return view('alumnos.index',compact('TituloTabla','alumnos','curp_request'));
 
 	}
@@ -148,7 +151,7 @@ class AlumnoController extends Controller{
 			if($this->alumnoRepo->delete($id)){
 				$rs=[
 				   'id'=>$id,
-				   'status'=>'ok',
+				   'status'=>'1',
 				   'mensaje'=>'Alumno Eliminado',
 				];
 			}
@@ -156,11 +159,9 @@ class AlumnoController extends Controller{
 			return response()->json($rs,200);
 		}
 		return response()->json([
-
+                                'status'=>'0',
 			                    'mensaje'=>'Error al eliminar el registro',
 		                        ],422);
-
-
 	}
 
 
@@ -194,6 +195,10 @@ class AlumnoController extends Controller{
 				case 200:
 					if($respuesta['modificado']==100){     // VALOR DE 100 PARA "MODIFICADO",
 						$alumno=$this->alumnoRepo->retrieveAlumnoTutor($id);
+						$tutores=array();
+						foreach($alumno->padretutores as $tutor){
+							$tutores[]=$tutor;
+						}
 						$a=([
 							'id'=>$alumno->id,
 							'curp'=>$alumno->curp,
@@ -202,11 +207,9 @@ class AlumnoController extends Controller{
 							'apmaterno'=>$alumno->apmaterno,
 							'localidad'=>$alumno->localidad,
 							'domicilio'=>$alumno->domicilio,
-							'nombretutor'=>$alumno->nombretutor,
-							'aptutor'=>$alumno->aptutor,
-							'amtutor'=>$alumno->amtutor,
+							'padretutores'=>$tutores,
 							'status'=>'1',
-							'mensaje'=>'Informacion Actualizada con Exito'
+							'mensaje'=>'Informacion actualizada con exito!'
 						]);
 					}else{   //VALOR DE 101 PARA "SIN MODIFICAR"
 						$a=([
@@ -226,9 +229,6 @@ class AlumnoController extends Controller{
 			}
 
             return response()->json($a,$respuesta['http_respuesta']);
-
-
-
 		}
 	}
 

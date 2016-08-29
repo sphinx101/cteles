@@ -55,18 +55,23 @@
 
                  if(data.status=='1') {
 
-                     var tutor = 'Sin registrar';
-                     if (data.nombretutor != null)
-                         tutor = data.nombretutor + ' ' + data.aptutor + ' ' + data.amtutor;
+                     var ahref='';
+                     if(data.padretutores.length>0) {
+                         $.each(data.padretutores, function (key, obj) {
+                             ahref+='<a href=/escuela/tutor/'+obj.id+'><i class="material-icons">face</i><span>'+obj.nombre+' '+obj.appaterno+' '+obj.apmaterno+'</span></a></br></br>';
+                         });
 
-
+                     }else{
+                            ahref='<a href="/escuela/tutor/create"><i class="material-icons">add_circle</i><span> Sin registrar</span></a>';
+                     }
+                    // console.log(ahref);
                      tr = '<tr id="alumno' + data.id + '">' +
-                         '   <td>' + data.id + '</td>' +
-                         '   <td>' + data.nombre + ' ' + data.appaterno + ' ' + data.apmaterno + '</td>' +
-                         '   <td>' + data.curp + '</td>' +
+                         '   <td>' + data.id        + '</td>' +
+                         '   <td>' + data.nombre    + ' '     + data.appaterno + ' ' + data.apmaterno + '</td>' +
+                         '   <td>' + data.curp      + '</td>' +
                          '   <td>' + data.domicilio + '</td>' +
                          '   <td>' + data.localidad + '</td>' +
-                         '   <td><a href="#"><span>' + tutor + '</span></a></td>';
+                         '   <td>' + ahref          + '</td>';
                       tr+='<td>' +
                           '<button type="button" class="btn btn-primary btn-xs btnEdit"   data-toggle="modal" data-target="#myModal"  data-alumno_id="' + data.id + '"><i class="material-icons">mode_edit</i></button>';
                       tr+='<button type="button" class="btn btn-danger btn-xs  btnDelete" data-toggle="modal" data-target="#myModal2" data-alumno_id="'+data.id +'" data-alumno_nombre="'+data.nombre+'" data-alumno_app="'+data.appaterno+'" data-alumno_apm="'+data.apmaterno+'"><i class="material-icons">delete_forever</i></button></td></tr>';

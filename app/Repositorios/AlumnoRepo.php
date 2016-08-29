@@ -14,15 +14,27 @@ use Symfony\Component\HttpFoundation\Response;
 class AlumnoRepo{
 
 
+    /**
+     * @return mixed
+     */
     public function all(){
-        $alumnos=null;
+
         $ct=$this->findCentroTrabajoByUser(\Auth::user()->id);
 
-        $alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
+        /*$alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
                  ->leftjoin('padretutores as pt','pt.alumno_id','=','alumnos.id')
                  ->where('ct.id','=',$ct->id)
                  ->orderby('alumnos.id')
-                 ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor');
+                 ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor');*/
+        /*$alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
+                ->leftjoin('alumno_padretutor as t','t.alumno_id','=','alumnos.id')
+                ->leftjoin('padretutores as pt','pt.id','=','t.padretutor_id')
+                ->where('ct.id','=',$ct->id)
+                ->orderby('alumnos.id')
+                ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor')->get();*/
+
+        $alumnos=Alumno::with('padretutores')->where('centrotrabajo_id','=',$ct->id);
+
 
         return $alumnos->paginate(5);
 
@@ -31,6 +43,10 @@ class AlumnoRepo{
     public function retrieveAlumnoCT($centrotrabajo_id){}
 
 
+    /**
+     * @param $data
+     * @return boolean
+     */
     public function store($data){
 
         return Alumno::create($data->all());
@@ -39,7 +55,7 @@ class AlumnoRepo{
     /**
      * @param $alumno_id
      * @param EditAlumnoRequest $request
-     * @return bool|mixed
+     * @return json
      */
     public function update($alumno_id, EditAlumnoRequest $request){
         $OK_HTTP=200;
@@ -86,43 +102,88 @@ class AlumnoRepo{
     }
 
 
+    /**
+     * @param $alumno_id
+     * @return mixed
+     */
     public function delete($alumno_id){
         $alumno=Alumno::find($alumno_id);
+
+        if(count($alumno->padretutores)>0) {
+            foreach ($alumno->padretutores as $tutor) {
+                $tutores_ids[] = $tutor->id;
+            }
+            $alumno->padretutores()->detach($tutores_ids); //Eliminar los registros relacionales entre alumno y padretutores
+        }
+
         return $alumno->delete();
+
     }
 
 
+    /**
+     * @param $id
+     * @return Model Alumno
+     */
     public function retrieveAlumnoTutor($id){
         $alumnos=null;
         $ct=$this->findCentroTrabajoByUser(\Auth::user()->id);
 
-        $alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
+        /*$alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
             ->leftjoin('padretutores as pt','pt.alumno_id','=','alumnos.id')
             ->where('ct.id','=',$ct->id)
             ->where('alumnos.id','=',$id)
-            ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor')->first();
+            ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor')->first();*/
+       /* $alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
+            ->leftjoin('alumno_padretutor as t','t.alumno_id','=','alumnos.id')
+            ->leftjoin('padretutores as pt','pt.id','=','t.padretutor_id')
+            ->where('ct.id','=',$ct->id)
+            ->where('alumnos.id','=',$id)
+            ->orderby('alumnos.id')
+            ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor')->first();*/
 
+        $alumnos=Alumno::with('padretutores')->where('centrotrabajo_id','=',$ct->id)->where('alumnos.id','=',$id)->first();
         return $alumnos;
     }
 
+    /**
+     * @param $alumno_id
+     * @return Model Alumno
+     */
     public function findAlumnoById($alumno_id){
         //dd(Alumno::find($alumno_id));
         return Alumno::find($alumno_id);
     }
 
+    /**
+     * @param $curp
+     * @return Collection Alumno
+     */
     public function retrieveAlumnoByCurp($curp){
         //dd($curp);
         $ct=$this->findCentroTrabajoByUser(\Auth::user()->id);
-        $alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
+        /*$alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
             ->leftjoin('padretutores as pt','pt.alumno_id','=','alumnos.id')
             ->where('ct.id','=',$ct->id)
             ->where('alumnos.curp','LIKE','%'.$curp.'%')
             ->orderby('alumnos.id')
-            ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor');
+            ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor');*/
+       /* $alumnos=Alumno::join('centrotrabajos as ct','ct.id','=','alumnos.centrotrabajo_id')
+            ->leftjoin('alumno_padretutor as t','t.alumno_id','=','alumnos.id')
+            ->leftjoin('padretutores as pt','pt.id','=','t.padretutor_id')
+            ->where('ct.id','=',$ct->id)
+            ->where ('alumnos.curp','LIKE','%'.$curp.'%')
+            ->orderby('alumnos.id')
+            ->select('alumnos.*','pt.nombre as nombretutor','pt.appaterno as aptutor','pt.apmaterno as amtutor');*/
 
+        $alumnos=Alumno::with('padretutores')->where('centrotrabajo_id','=',$ct->id)->where('alumnos.curp','LIKE','%'.$curp.'%');
         return $alumnos->paginate(5);
     }
 
+    /**
+     * @param $user_id
+     * @return Model Centrotrabajo
+     */
     public function findCentroTrabajoByUser($user_id){
         $user=User::find($user_id);
         $docente=$user->docente;

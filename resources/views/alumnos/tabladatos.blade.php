@@ -20,12 +20,16 @@
                 <td>{{ $alumno->curp }}</td>
                 <td>{{ $alumno->domicilio  }}</td>
                 <td>{{ $alumno->localidad }}</td>
-                @if($alumno->nombretutor)
-                    <td><a href="#"><span> {{ $alumno->nombretutor.' '.$alumno->aptutor.' '.$alumno->amtutor }}  </span></a></td>
-                @else
-                    <td><a href=""><span>Sin registrar</span></a></td>
-                @endif
 
+                <td>
+                @if(!$alumno->padretutores->isEmpty())
+                    @foreach($alumno->padretutores as $tutor)
+                        <a href="{!! route('escuela.tutor.show',[$tutor->id]) !!}"><i class="material-icons">face</i><span>{{$tutor->nombre.' '.$tutor->appaterno.' '.$tutor->apmaterno}}</span></a></br></br>
+                    @endforeach
+                @else
+                        <a href="{!! route('escuela.tutor.create') !!}"><i class="material-icons">add_circle</i><span>Sin registrar</span></a>
+                @endif
+                </td>
                 <td>
                     <!-- //Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}-->
                     <button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id={{$alumno->id}}><i class="material-icons">mode_edit</i></button>

@@ -37,5 +37,8 @@ class Alumno extends Model{
 	public function centrotrabajo(){
 		 return $this->belongsTo('cteles\Models\Centrotrabajo');
 	}
+	public function padretutores(){
+		return $this->belongsToMany('cteles\Models\Padretutor')->withTimestamps();
+	}
 
 }
