@@ -25,6 +25,11 @@ class PadretutorRepo{
 
 
     }
+
+    public function show($tutor_id){
+        $tutor=Padretutor::find($tutor_id);
+        return $tutor;
+    }
     public function findDocenteByUserId($user_id){
         $user=User::find($user_id);
 

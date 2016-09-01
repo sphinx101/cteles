@@ -62,7 +62,7 @@
                          });
 
                      }else{
-                            ahref='<a href="/escuela/tutor/create"><i class="material-icons">add_circle</i><span> Sin registrar</span></a>';
+                            ahref='<strong class="text-danger"><span> Sin registrar</span></strong>';
                      }
                     // console.log(ahref);
                      tr = '<tr id="alumno' + data.id + '">' +

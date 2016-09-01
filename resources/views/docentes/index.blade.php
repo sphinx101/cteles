@@ -5,7 +5,7 @@
         @include('flash::message')
         <div class="row">
             <div class="panel panel-primary">
-                <div class="panel-heading">Docentes Registrados para el Centro de Trabajo {!! $TituloTabla !!} </div>
+                <div class="panel-heading"><h4>Docentes Registrados para el Centro de Trabajo {!! $TituloTabla !!}</h4> </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         @if($docentes->isEmpty())

@@ -61,9 +61,10 @@ class PadreTutorController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		dd('vista datos padretutor');
+	public function show($id,Request $request){
+        $tutor=$this->tutorRepo->show($id);
+		$campo_desactivado='disabled';
+		return view('padretutor.show',compact('tutor','campo_desactivado'));
 	}
 
 	/**

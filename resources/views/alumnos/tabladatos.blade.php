@@ -27,7 +27,7 @@
                         <a href="{!! route('escuela.tutor.show',[$tutor->id]) !!}"><i class="material-icons">face</i><span>{{$tutor->nombre.' '.$tutor->appaterno.' '.$tutor->apmaterno}}</span></a></br></br>
                     @endforeach
                 @else
-                        <a href="{!! route('escuela.tutor.create') !!}"><i class="material-icons">add_circle</i><span>Sin registrar</span></a>
+                        <strong class="text-danger"><span>Sin registrar</span></strong>
                 @endif
                 </td>
                 <td>

@@ -35,10 +35,11 @@
             })
             .done(function(data)
             {
-                console.log(data);
+                //console.log(data);
 
                 $("#paginacion").empty().html(data);
                 location.hash = page;
+
             })
             .fail(function(jqXHR, ajaxOptions, thrownError)
             {
