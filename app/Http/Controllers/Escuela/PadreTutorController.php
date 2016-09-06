@@ -40,9 +40,9 @@ class PadreTutorController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		dd('formulario para registar padretutor');
+	public function create(){
+		$campo_desactivado='';
+
 	}
 
 	/**
