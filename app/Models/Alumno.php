@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Alumno extends Model{
     
 	protected $table = "alumnos";
+	protected $touches = ['centrotrabajo']; //actualizacion automatica de timestamps updated_at de centrotrabajo
 
 	use SoftDeletes;
 	protected $dates=['deleted_at'];

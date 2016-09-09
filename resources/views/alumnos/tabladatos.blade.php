@@ -3,14 +3,14 @@
 @else
     <table class="table table-hover">
         <thead id="tblHeader">
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>CURP</th>
-        <th>Domicilio</th>
-        <th>Localidad</th>
-        <th>Tutor</th>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>CURP</th>
+            <th>Domicilio</th>
+            <th>Localidad</th>
+            <th>Tutor</th>
 
-        <th width="140px">Accion</th>
+            <th width="140px">Accion</th>
         </thead>
         <tbody>
         @foreach($alumnos as $alumno)

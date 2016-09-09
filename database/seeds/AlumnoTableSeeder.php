@@ -10,10 +10,10 @@ class AlumnoTableSeeder extends Seeder
 
         $faker=Faker::create('es_ES');
 
-        for($i=0;$i<50;$i++){
+        for($i=0;$i<150;$i++){
             DB::table('alumnos')->insert(array(
-                'centrotrabajo_id'=>2,
-                'curp'=>$faker->unique()->ean13,
+                'centrotrabajo_id'=>$faker->randomElement(['1','2']),
+                'curp'=>$faker->unique()->ean8.$faker->isbn10,
                 'nombre'=>$faker->firstName,
                 'appaterno'=>$faker->lastName,
                 'apmaterno'=>$faker->lastName,

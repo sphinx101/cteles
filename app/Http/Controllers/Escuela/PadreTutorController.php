@@ -29,10 +29,12 @@ class PadreTutorController extends Controller {
 	 */
 	public function index(Request $request){
 
-        $pt=$this->tutorRepo->all();
-		return (response()->json($pt));
-
-
+        $paginaciontotal=$this->tutorRepo->all();
+		$pt=$paginaciontotal['paginador'];
+		$total_registrados=$paginaciontotal['total_registros'];
+		$TituloTabla=$paginaciontotal['centrotrabajo'];
+		//dd($pt);
+		return view('padretutor.index',compact('pt','total_registrados','TituloTabla'));
 	}
 
 	/**

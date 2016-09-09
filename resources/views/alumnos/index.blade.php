@@ -7,7 +7,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
 
-                        <h4>Alumnos Registrados  Centro de Trabajo {!! $TituloTabla !!}</h4>
+                        <h4>Alumnos Registrados  Centro de Trabajo: <strong> {!! $TituloTabla !!}</strong> </h4>
                         {!! Form::model($curp_request,['route'=>['escuela.alumnos.index'],'method'=>'GET','role'=>'form','class'=>'form-inline text-right']) !!}
 
                         {!! Form::label('lblcurp','CURP',array('class'=>'sr-only')) !!}

@@ -54,7 +54,10 @@ class AlumnoController extends Controller{
 
 		}
         $curp_request=\Request::all();
-		$TituloTabla=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
+		$cct=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->cct;
+		$cct_nombre=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
+		$TituloTabla=$cct.' '.$cct_nombre;
+
         if($request->ajax()){
 
 			return view('alumnos.tabladatos',compact('TituloTabla','alumnos','curp_request')); //paginacion via ajax
