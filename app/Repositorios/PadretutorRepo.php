@@ -88,6 +88,12 @@ class PadretutorRepo{
             $check=false;
         return $check;
     }
+
+    /**
+     * @param $nombre
+     * @param $paterno
+     * @return array
+     */
     public function searchTutores($nombre,$paterno){
 
         $docente=$this->findDocenteByUserId(\Auth::user()->id);
