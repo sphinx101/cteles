@@ -12,7 +12,7 @@
 </div>
 <div class="col-md-4">
     {!! Form::label('lblParentesco','Parentesco') !!}
-    {!! Form::text('parentesco',$tutor->parentesco,array('class'=>'form-control',$campo_desactivado)) !!}
+    {!! Form::text('parentesco',$tipo_parentesco,array('class'=>'form-control',$campo_desactivado)) !!}
 </div>
 <div class="col-md-4">
     {!! Form::label('lblTelefono','Telefono') !!}
@@ -39,3 +39,5 @@
     {!! Form::label('lblEscolaridad','Escolaridad') !!}
     {!! Form::text('escolaridad',$tutor->escolaridad,array('class'=>'form-control',$campo_desactivado)) !!}
 </div>
+
+

@@ -24,7 +24,7 @@
                 <td>
                 @if(!$alumno->padretutores->isEmpty())
                     @foreach($alumno->padretutores as $tutor)
-                        <a href="{!! route('escuela.tutor.show',[$tutor->id]) !!}"><i class="material-icons">face</i><span>{{$tutor->nombre.' '.$tutor->appaterno.' '.$tutor->apmaterno}}</span></a></br></br>
+                        <a href="{!! route('escuela.tutor.show',[$tutor->id,'alumno_id='.$alumno->id]) !!}"><i class="material-icons">face</i><span>{{$tutor->nombre.' '.$tutor->appaterno.' '.$tutor->apmaterno}}</span></a></br></br>
                     @endforeach
                 @else
                         <strong class="text-danger"><span>Sin registrar</span></strong>

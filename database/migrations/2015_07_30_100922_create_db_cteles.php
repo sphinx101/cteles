@@ -171,7 +171,7 @@ class CreateDbCteles extends Migration {
 			$table->string('apmaterno',20);
 			$table->string('telefono')->nullable();
 			$table->string('celular')->nullable();
-			$table->enum('parentesco',['PAPA','MAMA','HERMANOS','TIOS','PRIMOS','ABUELOS','CONOCIDOS']);
+			//$table->enum('parentesco',['PAPA','MAMA','HERMANOS','TIOS','PRIMOS','ABUELOS','CONOCIDOS']);
 			$table->string('domicilio',200)->nullable();
 			$table->string('localidad',30)->nullable();
 			$table->string('ocupacion',30)->nullable();
@@ -220,6 +220,14 @@ class CreateDbCteles extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 		});
+		Schema::create('parentescos',function(Blueprint $table){
+			$table->increments('id');
+			$table->string('tipo');
+
+			$table->timestamps();
+			$table->softDeletes();
+		});
+
 		Schema::create('alumno_padretutor', function(Blueprint $table)      // tabla pivote alumnos-padretutores
 		{
 
@@ -227,8 +235,11 @@ class CreateDbCteles extends Migration {
 			$table->foreign('alumno_id')->references('id')->on('alumnos')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('padretutor_id')->unsigned();
 			$table->foreign('padretutor_id')->references('id')->on('padretutores')->onUpdate('cascade')->onDelete('cascade');
+			$table->integer('parentesco_id')->unsigned();
+			$table->foreign('parentesco_id')->references('id')->on('parentescos')->onUpdate('cascade');
 			$table->timestamps();
 		});
+
 
 
 
@@ -245,6 +256,7 @@ class CreateDbCteles extends Migration {
 	public function down()
 	{
 		Schema::drop('alumno_padretutor');
+		Schema::drop('parentescos');
 		Schema::drop('calificaciones');
 		Schema::drop('padretutores');
 		Schema::drop('asistencias');

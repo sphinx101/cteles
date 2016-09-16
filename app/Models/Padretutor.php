@@ -39,7 +39,10 @@ class Padretutor extends Model {
 
     //***************************  Relaciones **************************
     public function alumnos(){
-        return $this->belongsToMany('cteles\Models\Alumno')->withTimestamps();
+        return $this->belongsToMany('cteles\Models\Alumno')->withTimestamps()->withPivot('parentesco_id');
+    }
+    public function parentescos(){
+        return $this->belongsToMany('cteles\Models\Parentesco','alumno_padretutor')->withTimestamps()->withPivot('alumno_id');
     }
 
 

@@ -8,7 +8,7 @@
             <div class="col-md-offset-2 col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4><span>Datos Generales Padre/Tutor</span></h4>
+                        <h4><span>Datos Generales del Padre/Tutor para el alumno: <strong>{!! $alumno->nombre.' '.$alumno->appaterno.' '.$alumno->apmaterno !!}</strong> </span></h4>
                     </div>
                     <div class="panel-body">
                        @include('padretutor.segmentos.campos')

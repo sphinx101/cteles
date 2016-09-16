@@ -18,7 +18,7 @@ class PadretutoresTableSeeder extends Seeder
                 'apmaterno'=>$faker->lastName,
                 'localidad'=>$faker->city,
                 'domicilio'=>$faker->address,
-                'parentesco'=>$faker->randomElement($array = array ('papa','mama','hermanos','tios','primos','abuelos','conocidos'))
+
 
             ));
         }

@@ -2,9 +2,12 @@
 
 use cteles\Http\Requests;
 use cteles\Http\Controllers\Controller;
+use cteles\Models\Alumno;
 use cteles\Repositorios\AlumnoRepo;
 use cteles\Repositorios\PadretutorRepo;
+
 use Illuminate\Http\Request;
+use Laracasts\Flash\Flash;
 
 class PadreTutorController extends Controller {
 
@@ -28,13 +31,26 @@ class PadreTutorController extends Controller {
 	 * @return Response
 	 */
 	public function index(Request $request){
+		$nombre=$request->get('nombre');
+		$paterno=$request->get('paterno');
+		$buscar_request=$request->all();
 
-        $paginaciontotal=$this->tutorRepo->all();
+		if((!isset($nombre) || trim($nombre)==='') && (!isset($paterno) || trim($paterno)==='')) {
+
+			$paginaciontotal= $this->tutorRepo->all();
+		}
+		else{
+
+			$paginaciontotal=$this->tutorRepo->searchTutores($nombre,$paterno);
+
+		}
+
+
 		$pt=$paginaciontotal['paginador'];
 		$total_registrados=$paginaciontotal['total_registros'];
 		$TituloTabla=$paginaciontotal['centrotrabajo'];
 		//dd($pt);
-		return view('padretutor.index',compact('pt','total_registrados','TituloTabla'));
+		return view('padretutor.index',compact('pt','total_registrados','TituloTabla','buscar_request'));
 	}
 
 	/**
@@ -57,16 +73,24 @@ class PadreTutorController extends Controller {
 		//
 	}
 
+
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	 * @param $id
+	 * @param Request $request
+	 * @return \Illuminate\View\View
+     */
 	public function show($id,Request $request){
-        $tutor=$this->tutorRepo->show($id);
-		$campo_desactivado='disabled';
-		return view('padretutor.show',compact('tutor','campo_desactivado'));
+
+        if($this->tutorRepo->checkRelationTutorAlumno($request->get('alumno_id'),$id)) {
+			$tutor = $this->tutorRepo->show($id, $request);
+			$tipo_parentesco = $this->tutorRepo->findTutorParentescoById($tutor->pivot->parentesco_id)->tipo;
+			$alumno = $this->alumnoRepo->findAlumnoById(($request['alumno_id']));
+			$campo_desactivado = 'disabled';
+
+			return view('padretutor.show', compact('tutor', 'tipo_parentesco', 'alumno', 'campo_desactivado'));
+		}
+		Flash::error('No es posible procesar su peticion');
+		return redirect(url('/home'));
 	}
 
 	/**

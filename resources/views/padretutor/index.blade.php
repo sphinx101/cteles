@@ -8,6 +8,14 @@
                 <div class="panel-heading">
                     <h4>Padres/Tutores Registrados para  Centro de Trabajo: <strong>{!!$TituloTabla!!}</strong>  </h4>
                     <h4>TOTAL REGISTRADO:  {!!$total_registrados  !!} Personas </h4>
+                    {!! Form::model($buscar_request,['route'=>'escuela.tutor.index','method'=>'GET','role'=>'form','class'=>'form-inline text-right']) !!}
+                    {!! Form::label('lblNombre','Nombre',['class'=>'sr-only']) !!}
+                    {!! Form::text('nombre',null,['class'=>'form-control','id'=>'lblNombre','placeholder'=>'Nombre']) !!}
+                    {!! Form::label('lblPaterno','Paterno',['class'=>'sr-only']) !!}
+                    {!! Form::text('paterno',null,['class'=>'form-control','id'=>'lblPaterno','placeholder'=>'Ap. Paterno']) !!}
+                    {!! Form::submit('Buscar',['class'=>'btn btn-info']) !!}
+                    <a href="{{url('/escuela/tutor')}}" class="btn btn-default" role="button">Mostrar Todos</a>
+                    {!! Form::close() !!}
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -39,7 +47,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {!! $pt->render() !!}
+                            {!! $pt->appends($buscar_request)->render() !!}
 
                       @else
                             <div class="well text-center">No Existen Padre/Tutor Registrados</div>

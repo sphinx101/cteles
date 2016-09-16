@@ -28,7 +28,7 @@
         </div>
     </div> <!-- container -->
 
-    <!-- TODO: separar en partials las ventanas modales-->
+
     <!-- Modal para Editar-->
     @include('partials.modalOpenEdit')
         {!! Form::open(['role'=>'form','method'=>'PATCH','id'=>'frmEdit']) !!}

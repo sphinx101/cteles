@@ -58,7 +58,7 @@
                      var ahref='';
                      if(data.padretutores.length>0) {
                          $.each(data.padretutores, function (key, obj) {
-                             ahref+='<a href=/escuela/tutor/'+obj.id+'><i class="material-icons">face</i><span>'+obj.nombre+' '+obj.appaterno+' '+obj.apmaterno+'</span></a></br></br>';
+                             ahref+='<a href=/escuela/tutor/'+obj.id+'?alumno_id='+data.id+'><i class="material-icons">face</i><span>'+obj.nombre+' '+obj.appaterno+' '+obj.apmaterno+'</span></a></br></br>';
                          });
 
                      }else{
