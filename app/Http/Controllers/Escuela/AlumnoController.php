@@ -54,9 +54,9 @@ class AlumnoController extends Controller{
 
 		}
         $curp_request=\Request::all();
-		$cct=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->cct;
-		$cct_nombre=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
-		$TituloTabla=$cct.' '.$cct_nombre;
+		$cct=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre_completo;
+		//$cct_nombre=$this->alumnoRepo->findCentroTrabajoByUser(\Auth::user()->id)->nombre;
+		$TituloTabla=$cct;
 
         if($request->ajax()){
 
@@ -75,7 +75,7 @@ class AlumnoController extends Controller{
 	public function create(){
 
 		//dd('formulario registro de alumno');
-		$titulo='Nuevo/PreInscripcion Alumno    TODOS LOS CAMPOS SON OBLIGATORIOS';
+		$titulo='Nuevo Alumno    TODOS LOS CAMPOS SON OBLIGATORIOS';
 		$ccts=$this->centrotrabajoRepo->findCentrotrabajoByUserId(Auth::user()->id)->id;
 		$etiquetaBoton='Guardar';
 		return view('alumnos.create')->with('titulo',$titulo)->with('ccts',$ccts)->with('etiquetaBoton',$etiquetaBoton);

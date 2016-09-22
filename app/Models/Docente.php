@@ -50,6 +50,14 @@ class Docente extends Model {
     }
 
 
+    /****************************** Accesores y Mutadores *****************************/
+
+    public function getNombreCompletoAttribute(){
+        return $this->nombre.' '.$this->appaterno.' '.$this->apmaterno;
+    }
+    public function getCurpNombrecompletoAttribute(){
+        return $this->curp.' - '.$this->nombre.' '.$this->appaterno.' '.$this->apmaterno;
+    }
 
 
 }

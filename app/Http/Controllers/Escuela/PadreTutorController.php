@@ -1,7 +1,8 @@
 <?php namespace cteles\Http\Controllers\Escuela;
 
-use cteles\Http\Requests;
+//use cteles\Http\Requests;
 use cteles\Http\Controllers\Controller;
+//use cteles\Http\Requests\Request;
 use cteles\Models\Alumno;
 use cteles\Repositorios\AlumnoRepo;
 use cteles\Repositorios\PadretutorRepo;

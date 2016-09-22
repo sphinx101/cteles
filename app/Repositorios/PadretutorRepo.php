@@ -22,7 +22,7 @@ class PadretutorRepo{
         $docente=$this->findDocenteByUserId(\Auth::user()->id);
         $ct_id=Centrotrabajo::find($docente->centrotrabajo_id)->id;
         //$alumnos=Centrotrabajo::find($ct_id)->alumnos;
-        $centrotrabajo=Centrotrabajo::find($ct_id);
+        $centrotrabajo=Centrotrabajo::find($ct_id)->nombre_completo;
         //$tutores=array();
 
         /*foreach($alumnos as $alumno){
@@ -39,16 +39,17 @@ class PadretutorRepo{
         $ts=Padretutor::whereHas('alumnos',function($query) use($ct_id){
              $query->where('alumnos.centrotrabajo_id','=',$ct_id);
         })->get();
-        $currentPage=LengthAwarePaginator::resolveCurrentPage()==null ? 1 : LengthAwarePaginator::resolveCurrentPage();
+        /*$currentPage=LengthAwarePaginator::resolveCurrentPage()==null ? 1 : LengthAwarePaginator::resolveCurrentPage();
         $perPage=5;
         $currentPageSearchResult=$ts->slice(($currentPage-1)*$perPage,$perPage)->all();
 
         $paginador=new LengthAwarePaginator($currentPageSearchResult,count($ts),$perPage,$currentPage,['path'=>LengthAwarePaginator::resolveCurrentPath()]);
-
+        */
+        $paginador=$this->Paginador($ts,5);
         $paginaciontotal=[
                'paginador'=>$paginador,
                'total_registros'=>$ts->count(),
-               'centrotrabajo' => $centrotrabajo->cct.' '.$centrotrabajo->nombre,
+               'centrotrabajo' => $centrotrabajo,
         ];
 
         return $paginaciontotal;
@@ -82,7 +83,9 @@ class PadretutorRepo{
         $check=true;
         $centrotrabajo_id= $docente=$this->findDocenteByUserId(\Auth::user()->id)->centrotrabajo_id;
         $tutor=Padretutor::whereHas('alumnos',function($query) use($centrotrabajo_id,$alumno_id,$padretutor_id){
-               $query->where('alumnos.centrotrabajo_id','=',$centrotrabajo_id)->where('alumnos.id','=',$alumno_id)->where('padretutores.id','=',$padretutor_id);
+               $query->where('alumnos.centrotrabajo_id','=',$centrotrabajo_id)
+                     ->where('alumnos.id','=',$alumno_id)
+                     ->where('padretutores.id','=',$padretutor_id);
         })->get();
         if($tutor->count()==0)
             $check=false;
@@ -98,20 +101,41 @@ class PadretutorRepo{
 
         $docente=$this->findDocenteByUserId(\Auth::user()->id);
         $ct_id=Centrotrabajo::find($docente->centrotrabajo_id)->id;
-        $centrotrabajo=Centrotrabajo::find($ct_id);
-        $ts=Padretutor::whereHas('alumnos',function($query)use($ct_id) {
-            $query->where('alumnos.centrotrabajo_id', '=', $ct_id);
-        })->whereHas('alumnos',function($query)use($nombre){
-                  $query->where('padretutores.nombre','like','%'.$nombre.'%');
-        })->OrWhereHas('alumnos',function($query)use($paterno){
-                  $query->where('padretutores.appaterno','like','%'.$paterno.'%');
-        })->paginate(5);
+        $centrotrabajo=Centrotrabajo::find($ct_id)->nombre_completo;
+        /*$ts=Padretutor::has('alumnos')->whereHas('alumnos',function($query)use($ct_id,$nombre,$paterno){
+            $query->where('alumnos.centrotrabajo_id',$ct_id)
+                  ->where('padretutores.nombre','like','%'.$nombre.'%')
+                  ->where('padretutores.appaterno','like','%'.$paterno.'%');
+        })->get();*/
+        $ts=Padretutor::with('alumnos')
+                      ->whereHas('alumnos',function($query)use($ct_id){
+                          $query->where('centrotrabajo_id',$ct_id);
+                      })->where(function($subquery)use($nombre,$paterno){
+                         $subquery->whereHas('alumnos',function($query)use($nombre){
+                             $query->where('padretutores.nombre','like','%'.$nombre.'%');
+                         });
+                         $subquery->whereHas('alumnos',function($query)use($paterno){
+                             $query->where('padretutores.appaterno','like','%'.$paterno.'%');
+                         });
+                      })->get();
+
+        $paginador=$this->Paginador($ts,5);
 
         $paginaciontotal=[
-             'paginador'=>$ts,
+             'paginador'=>$paginador,
              'total_registros'=>$ts->count(),
-             'centrotrabajo'=>$centrotrabajo->cct.' '.$centrotrabajo->nombre,
+             'centrotrabajo'=>$centrotrabajo,
         ];
         return $paginaciontotal;
+    }
+
+    private function Paginador($collection,$perPage){
+        $currentPage=LengthAwarePaginator::resolveCurrentPage()==null ? 1 : LengthAwarePaginator::resolveCurrentPage();
+
+        $currentPageSearchResult=$collection->slice(($currentPage-1)*$perPage,$perPage)->all();
+
+        $paginador=new LengthAwarePaginator($currentPageSearchResult,count($collection),$perPage,$currentPage,['path'=>LengthAwarePaginator::resolveCurrentPath()]);
+
+        return $paginador;
     }
 }

@@ -52,7 +52,15 @@ class DocenteRepo{
     }
 
 
+    /**
+     * @param $ct_id
+     * @return Collection Docente $docentes
+     */
+    public function retrieveAllDocenteByCT($ct_id){
+        $docentes = Centrotrabajo::find($ct_id)->docentes;
 
+        return $docentes;
+    }
     /**
      * @param $id
      * @return Docente

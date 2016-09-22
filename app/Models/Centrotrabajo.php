@@ -25,4 +25,11 @@ class Centrotrabajo extends Model{
     public function alumnos(){
         return $this->hasMany('cteles\Models\Alumno');
     }
+
+	/********************************* Accesores y Mutadores ****************************************/
+
+	public function getNombreCompletoAttribute(){
+
+		return $this->cct.' '.$this->nombre;
+	}
 }

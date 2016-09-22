@@ -31,6 +31,7 @@ Route::group(['prefix' =>'admin','namespace'=>'Admin', 'middleware' => ['rolperm
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('home', 'HomeController@index');
+
     Route::group(['prefix' => 'escuela','namespace' => 'Escuela','middleware'=>'rolpermiso','permisos'=>['control-director','control-docente','control-alumnos']],function(){
         Route::resource('docentes','DocenteController');
     });
@@ -38,6 +39,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix'=>'escuela','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>['director','docente']],function(){
         Route::resource('alumnos', 'AlumnoController',['except'=>['update','edit']]);
         Route::resource('tutor','PadreTutorController');
+    });
+
+    Route::group(['prefix'=>'escuela','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>'director'],function(){
+        Route::resource('aulas','AulaController');
     });
 
     // PETICION VIA AJAX PARA EDITAR Y BORRAR ALUMNOS
