@@ -51,7 +51,15 @@ class AulaController extends Controller {
 	 * @param Request $request
 	 */
 	public function index(Request $request)	{
-          return view('aula.index');
+		if(\Entrust::hasRole('director')) {
+			$ct_id = User::find(\Auth::user()->id)->docente->centrotrabajo_id;
+			$TituloTabla = Centrotrabajo::find($ct_id)->nombre_completo;
+
+            $aulas_asignadas=$this->aulaRepo->all($ct_id);
+
+			//dd($aulas_asignadas);
+			return view('aula.index', compact('TituloTabla','aulas_asignadas'));
+		}
 	}
 
 	/**
@@ -60,17 +68,17 @@ class AulaController extends Controller {
 	 *
 	 */
 	public function create(){
-		if(\Auth::user()->type=='director'){
+		if(\Entrust::hasRole('director')){
 			$ct_id=User::find(\Auth::user()->id)->docente->centrotrabajo_id;
 			$docentes=$this->docenteRepo->retrieveAllDocenteByCT($ct_id)->lists('curp_nombrecompleto','id');
             $turnos=$this->turnoRepo->all()->lists('nom_turno','id');
 			$grupos=$this->grupoRepo->all()->lists('nom_grupo','id');
 			$grados=$this->gradoRepo->all()->lists('nom_grado','id');
 			$ciclos=$this->cicloescolarRepo->all()->lists('ciclo','id');
+			$aulas_asignadas=$this->aulaRepo->all($ct_id);
 			$TituloTabla=Centrotrabajo::find($ct_id)->nombre_completo;
 
-
-			return view('aula.create',compact('docentes','turnos','grupos','grados','ciclos','TituloTabla'));
+			return view('aula.create',compact('docentes','turnos','grupos','grados','ciclos','TituloTabla','aulas_asignadas'));
 		}
 	}
 
@@ -80,7 +88,10 @@ class AulaController extends Controller {
 	 *
 	 */
 	public function store(CreateAulaRequest $aulaRequest){
-        dd($aulaRequest->all());
+          $this->aulaRepo->store($aulaRequest);
+		  Flash::info('Docente Asignado con Exito al Aula');
+		  return redirect('/escuela/aulas/create');
+
 	}
 
 	/**
@@ -102,7 +113,7 @@ class AulaController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+
 	}
 
 	/**
@@ -122,12 +133,28 @@ class AulaController extends Controller {
 	 * @param  int  $id
 	 *
 	 */
-	public function destroy($id)
-	{
-		//
+	public function destroy($id,Request $request){
+
+
+
 	}
 
+    public function destroyAjax($id,Request $request){
+		if($request->ajax()){
+			if($this->aulaRepo->delete($id)){
+				return response()->json([
+					'status'=>'1',
+					'mensaje'=>'Docente eliminado del Aula asignada'
+				],200);
+			}
+			return response()->json([    //Error si no se ha podido eliminar el registro
 
+				'mensaje'=>'Ha ocurrido un error, favor de intenterlo mas tarde'
+			],422);
+		}
+		Flash::error('No es posible procesar su peticion');
+		return redirect(url('/home'));
+	}
 
 
 }

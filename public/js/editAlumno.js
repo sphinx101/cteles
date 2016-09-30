@@ -79,7 +79,7 @@
 
                      $('#alumno' + alumno_id).replaceWith(tr);
                      $frmEdit[0].reset();
-                     $('#myModal').modal('hide');
+                     $('#modalEdit').modal('hide');
 
                  }
                  toastr.success(data.mensaje,'Aviso');
@@ -124,7 +124,7 @@
                success:function(data){
 
 
-                   $('#myModal2').modal('hide');
+                   $('#modalDelete').modal('hide');
                    toastr.info('ID: '+data.id+' '+data.mensaje,'Aviso');
                    $('#alumno' + alumno_id).remove();
 

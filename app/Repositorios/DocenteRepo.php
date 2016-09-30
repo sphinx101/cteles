@@ -5,6 +5,7 @@ namespace cteles\Repositorios;
 
 
 use cteles\Http\Requests\EditDocenteRequest;
+use cteles\Models\Aula;
 use cteles\Models\Centrotrabajo;
 use cteles\Models\Docente;
 use cteles\User;
@@ -57,9 +58,14 @@ class DocenteRepo{
      * @return Collection Docente $docentes
      */
     public function retrieveAllDocenteByCT($ct_id){
-        $docentes = Centrotrabajo::find($ct_id)->docentes;
-
+        $docentes=Docente::has('user')
+                           ->whereHas('user',function($query){
+                               $query->where('type','=','docente');
+                           })->whereHas('centrotrabajo',function($query)use($ct_id){
+                               $query->where('id',$ct_id);
+                           })->get();
         return $docentes;
+
     }
     /**
      * @param $id

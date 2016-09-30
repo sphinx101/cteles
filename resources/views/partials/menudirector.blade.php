@@ -10,7 +10,7 @@
 
         @if(Entrust::hasRole('director') || Entrust::hasRole('admin'))
             <li><a href="{{route('escuela.docentes.index')}}"><i class="material-icons">sort_by_alpha</i><span>&nbsp;Listar Docente Aula Asignada</span></a></li>
-            <li><a href="{{route('escuela.aulas.create')}}"><i class="material-icons">local_library</i><span>&nbsp;Asignar Aula a Docente</span></a></li>
+            <li><a href="{{route('escuela.aulas.index')}}"><i class="material-icons">local_library</i><span>&nbsp;Listar Aula con Docente</span></a></li>
 
         @endif
         @if(Entrust::hasRole('supervisor') || Entrust::hasRole('admin') )

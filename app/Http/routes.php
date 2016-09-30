@@ -42,10 +42,11 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
     Route::group(['prefix'=>'escuela','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>'director'],function(){
-        Route::resource('aulas','AulaController');
+        Route::resource('aulas','AulaController',['except'=>['update','edit','show','destroy']]);
+        Route::delete('aulas/ajax/{id}','AulaController@destroyAjax'); // PETICION VIA AJAX PARA ELIMINAR AULA ASIGNADA
     });
 
-    // PETICION VIA AJAX PARA EDITAR Y BORRAR ALUMNOS
+    // PETICION VIA AJAX PARA EDITAR  ALUMNOS
     Route::group(['prefix'=>'escuela/alumnos/ajax','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>['director','docente']],function(){
 
          Route::get('edicion/{id}','AlumnoController@getAlumnoJson'); //

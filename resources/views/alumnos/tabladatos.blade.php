@@ -32,10 +32,10 @@
                 </td>
                 <td>
                     <!-- //Form::open(['route'=>['escuela.alumnos.destroy'],'method'=>'DELETE','id'=>'frmBorrar','role'=>'form']) !!}-->
-                    <button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#myModal" data-alumno_id={{$alumno->id}}><i class="material-icons">mode_edit</i></button>
+                    <button type="button" class="btn btn-primary btn-xs btnEdit" data-toggle="modal" data-target="#modalEdit" data-alumno_id={{$alumno->id}}><i class="material-icons">mode_edit</i></button>
 
                     <!--a href="!! //route('escuela.alumnos.edit', [$alumno->id]) !!}" class="btn btn-info btn-xs" role="button"><i class="material-icons">mode_edit</i></a-->
-                    <button type="button" class="btn btn-danger btn-xs btnDelete" data-toggle="modal" data-target="#myModal2"
+                    <button type="button" class="btn btn-danger btn-xs btnDelete" data-toggle="modal" data-target="#modalDelete"
                             data-alumno_id={{$alumno->id}} data-alumno_nombre={{$alumno->nombre}} data-alumno_app={{$alumno->appaterno}} data-alumno_apm={{$alumno->apmaterno}}>
                         <i class="material-icons">delete_forever</i></button>
 
