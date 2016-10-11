@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AlumnoTableSeeder');
 		$this->call('PadretutoresTableSeeder');
 		$this->call('ParentescoTableSeeder');
+		$this->call('TurnosTableSeeder');
+		$this->call('GradosTableSeeder');
+		$this->call('GruposTableSeeder');
+		$this->call('CicloescolarTableSeeder');
 
 	}
 

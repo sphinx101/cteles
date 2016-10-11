@@ -18,10 +18,10 @@
            $lblPregunta=$('#lblPregunta');
 
            var pregunta='¿ Esta seguro que desea eliminar al DOCENTE '+nombre_docente+
-                        ' de GRADO '+grado+
-                        ' GRUPO '+grupo+
-                        ' del TURNO '+turno+
-                        ' correspondiente al CICLO ESCOLAR ?'+ciclo;
+                        ' del Grado '+grado+
+                        ' Grupo '+grupo+
+                        ' del Turno '+turno+
+                        ' correspondiente al CICLO ESCOLAR '+ciclo+' ?';
            $lblPregunta.text(pregunta);
         });
         $(document).on('click','.btnDeleteSubmit',function(e){

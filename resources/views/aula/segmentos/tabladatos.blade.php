@@ -3,6 +3,7 @@
         <thead id="tblHeader">
             <th>Ciclo Escolar</th>
             <th>Docente</th>
+            <th>Curp</th>
             <th>Grado</th>
             <th>Grupo</th>
             <th>Turno</th>
@@ -14,7 +15,7 @@
                     <tr id='aula{{$aula->id}}'>
                         <td>{!! $aula->cicloescolar->ciclo !!}</td>
                         <td>{!! $aula->docente->nombre_completo !!}</td>
-                        {{$span=''}}
+                        <td>{!! $aula->docente->curp !!}</td>
                         @if($aula->grado->id==1)
                             <td><span class="label label-primary">{!! $aula->grado->nom_grado !!}</span></td>
                         @elseif($aula->grado->id==2)

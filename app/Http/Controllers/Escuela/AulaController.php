@@ -6,8 +6,6 @@ use cteles\Http\Controllers\Controller;
 
 use cteles\Http\Requests\CreateAulaRequest;
 use cteles\Models\Centrotrabajo;
-use cteles\Models\Docente;
-use cteles\Models\Grupo;
 use cteles\Repositorios\AulaRepo;
 use cteles\Repositorios\CicloescolarRepo;
 use cteles\Repositorios\DocenteRepo;
@@ -51,7 +49,7 @@ class AulaController extends Controller {
 	 * @param Request $request
 	 */
 	public function index(Request $request)	{
-		if(\Entrust::hasRole('director')) {
+		//if(\Entrust::hasRole('director')) {
 			$ct_id = User::find(\Auth::user()->id)->docente->centrotrabajo_id;
 			$TituloTabla = Centrotrabajo::find($ct_id)->nombre_completo;
 
@@ -59,7 +57,7 @@ class AulaController extends Controller {
 
 			//dd($aulas_asignadas);
 			return view('aula.index', compact('TituloTabla','aulas_asignadas'));
-		}
+		//}
 	}
 
 	/**
@@ -68,7 +66,7 @@ class AulaController extends Controller {
 	 *
 	 */
 	public function create(){
-		if(\Entrust::hasRole('director')){
+		//if(\Entrust::hasRole('director')){
 			$ct_id=User::find(\Auth::user()->id)->docente->centrotrabajo_id;
 			$docentes=$this->docenteRepo->retrieveAllDocenteByCT($ct_id)->lists('curp_nombrecompleto','id');
             $turnos=$this->turnoRepo->all()->lists('nom_turno','id');
@@ -79,7 +77,7 @@ class AulaController extends Controller {
 			$TituloTabla=Centrotrabajo::find($ct_id)->nombre_completo;
 
 			return view('aula.create',compact('docentes','turnos','grupos','grados','ciclos','TituloTabla','aulas_asignadas'));
-		}
+		//}
 	}
 
 	/**

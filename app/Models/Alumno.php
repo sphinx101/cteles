@@ -44,5 +44,7 @@ class Alumno extends Model{
 	public function parentescos(){
 		return $this->belongsToMany('cteles\Models\Parentesco','alumno_padretutor')->withTimestamps()->withPivot('padretutor_id');
 	}
-
+    public function inscripciones(){
+	    return $this->hasMany('cteles\Models\Inscripcion');
+	}
 }

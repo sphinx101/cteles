@@ -16,7 +16,7 @@ class AulaRepo{
                    ->whereHas('docente.user',function($query)use($ct_id){
                         $query->where('centrotrabajo_id',$ct_id)
                               ->where('type','=','docente');
-                   })->paginate(4);
+                   })->orderby('turno_id')->orderby('grado_id')->orderby('grupo_id')->paginate(4);
         return $aulas;
     }
 

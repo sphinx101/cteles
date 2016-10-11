@@ -35,12 +35,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'escuela','namespace' => 'Escuela','middleware'=>'rolpermiso','permisos'=>['control-director','control-docente','control-alumnos']],function(){
         Route::resource('docentes','DocenteController');
     });
-
+    //ALUMNOS Y TUTORES
     Route::group(['prefix'=>'escuela','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>['director','docente']],function(){
         Route::resource('alumnos', 'AlumnoController',['except'=>['update','edit']]);
         Route::resource('tutor','PadreTutorController');
     });
-
+   // AULAS
     Route::group(['prefix'=>'escuela','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>'director'],function(){
         Route::resource('aulas','AulaController',['except'=>['update','edit','show','destroy']]);
         Route::delete('aulas/ajax/{id}','AulaController@destroyAjax'); // PETICION VIA AJAX PARA ELIMINAR AULA ASIGNADA
@@ -53,9 +53,7 @@ Route::group(['middleware' => 'auth'], function(){
          Route::patch('edicion/{id}','AlumnoController@updateAjax');
     });
 
-   /* Route::group(['prefix'=>'escuela/alumnos/ajax','namespace'=>'Escuela'],function(){
-        Route::patch('edicion/{id}','AlumnoController@updateAjax');
-    });*/
+
 
 
     Route::get('existeDocente','HomeController@exist');  //solicitud AJAX
