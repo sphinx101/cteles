@@ -51,6 +51,7 @@ class HomeController extends Controller {
 
        return view('home');
 	}
+    //Verifica via ajax que los datos del docente(usuario) esten registrados
     public function exist(){
         $existDocente=$this->docenteRepo->existsDatosRegistrados(\Auth::user()->id);
         return Response::json(array('success'=>true,'existe'=>$existDocente));
