@@ -81,11 +81,12 @@ class AulaController extends Controller {
 		//}
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 *
-	 */
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param CreateAulaRequest $aulaRequest
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
 	public function store(CreateAulaRequest $aulaRequest){
           $this->aulaRepo->store($aulaRequest);
 		  Flash::info('Docente Asignado con Exito al Aula');
