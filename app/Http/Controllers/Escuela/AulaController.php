@@ -43,11 +43,12 @@ class AulaController extends Controller {
 
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @param Request $request
-	 */
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
 	public function index(Request $request)	{
 		//if(\Entrust::hasRole('director')) {
 			$ct_id = User::find(\Auth::user()->id)->docente->centrotrabajo_id;
