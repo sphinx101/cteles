@@ -4,7 +4,7 @@
     </a>
 
     <ul class="dropdown-menu">
-        <li><a href="{{route('escuela.docentes.index')}}"><i class="material-icons">backup</i><span>&nbsp;Respaldar Base de Datos</span></a></li>
+        <li><a href=""><i class="material-icons">backup</i><span>&nbsp;Respaldar Base de Datos</span></a></li>
 
     </ul>
 </li>

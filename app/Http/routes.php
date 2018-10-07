@@ -29,10 +29,18 @@ Route::group(['prefix' =>'admin','namespace'=>'Admin', 'middleware' => ['rolperm
 
 
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('home', 'HomeController@index');
 
-    Route::group(['prefix' => 'escuela','namespace' => 'Escuela','middleware'=>'rolpermiso','permisos'=>['control-director','control-docente','control-alumnos']],function(){
+Route::group(['middleware' => 'auth'], function(){
+
+
+    Route::get('dashboard','DashboardController@index'); // GUI v2.0
+
+
+
+    Route::get('home', 'HomeController@index'); // GUI v1.0
+
+    //DOCENTES
+    Route::group(['prefix' => 'escuela','namespace' => 'Escuela','middleware'=>'rolpermiso','permisos'=>['control-total','control-director','control-docente','control-alumnos']],function(){
         Route::resource('docentes','DocenteController');
     });
     //ALUMNOS Y TUTORES
@@ -41,7 +49,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('tutor','PadreTutorController');
     });
    // AULAS
-    Route::group(['prefix'=>'escuela','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>'director'],function(){
+    Route::group(['prefix'=>'escuela','namespace'=>'Escuela','middleware'=>'rolpermiso','roles'=>['admin','director']],function(){
         Route::resource('aulas','AulaController',['except'=>['update','edit','show','destroy']]);
         Route::delete('aulas/ajax/{id}','AulaController@destroyAjax'); // PETICION VIA AJAX PARA ELIMINAR AULA ASIGNADA
     });

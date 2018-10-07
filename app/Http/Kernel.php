@@ -29,7 +29,7 @@ class Kernel extends HttpKernel {
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'cteles\Http\Middleware\RedirectIfAuthenticated',
 		'rolpermiso' => 'cteles\Http\Middleware\RolPermisoMiddleware',
-		//'cors' => 'cteles\Http\Middleware\Cors',
+		'cors' => 'cteles\Http\Middleware\Cors',
 
 	];
 

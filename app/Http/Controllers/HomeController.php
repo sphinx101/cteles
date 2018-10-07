@@ -49,7 +49,7 @@ class HomeController extends Controller {
            Flash::error('Debe de Registrar sus datos personales (Centro de Trabajo,RFC,CURP,Nombre Completo,Celular,Telefono) en la opcion -Registrar Datos');
        }
 
-       return view('home');
+       return view('home'); //home
 	}
     //Verifica via ajax que los datos del docente(usuario) esten registrados
     public function exist(){

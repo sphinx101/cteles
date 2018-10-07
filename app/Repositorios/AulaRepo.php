@@ -25,6 +25,7 @@ class AulaRepo{
      * @return boolean
      */
     public function store($data){
+        //dd($data->all());
        return Aula::create($data->all());
     }
 

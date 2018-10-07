@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $.ajax({
-        url:'http://cteles.local/existeDocente',
+        url:'/existeDocente',
         type:'GET',
         dataType:'json',
         success:function(data){

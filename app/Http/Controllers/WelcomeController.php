@@ -35,4 +35,6 @@ class WelcomeController extends Controller {
 		return view('inicio');
 	}
 
+
+
 }
